@@ -5,13 +5,34 @@ import '../infoRecipes/infoRecipes.dart';
 //import '../resources/resources.dart';
 
 List<Recipes> myRecipes = [
-Recipes(nameRecipes: 'Лосось в соусе терияки', timeCook: '45 минут', imgRecipes: 'assets/img/salmon.jpg'),
-Recipes(nameRecipes: 'Поке боул с сыром тофу', timeCook: '30 минут', imgRecipes: 'assets/img/poke.jpeg'),
-Recipes(nameRecipes: 'Стейк из говядины по-грузински с картошкой', timeCook: '1 час 15 минут', imgRecipes: 'assets/img/steak.jpg'),
-Recipes(nameRecipes: 'Тосты с голубикой и бананом', timeCook: '45 минут', imgRecipes: 'assets/img/toast.jpg'),
-Recipes(nameRecipes: 'Паста с морепродуктами', timeCook: '25 минут', imgRecipes: 'assets/img/pasta.jpg'),
-Recipes(nameRecipes: 'Бургер с двумя котлетами', timeCook: '1 час', imgRecipes: 'assets/img/burger.jpg'),
-Recipes(nameRecipes: 'Пицца Маргарита домашняя',  timeCook : '25 минут', imgRecipes: 'assets/img/pizza.jpg'),
+  Recipes(
+      nameRecipes: 'Лосось в соусе терияки',
+      timeCook: '45 минут',
+      imgRecipes: 'assets/img/salmon.jpg'),
+  Recipes(
+      nameRecipes: 'Поке боул с сыром тофу',
+      timeCook: '30 минут',
+      imgRecipes: 'assets/img/poke.jpeg'),
+  Recipes(
+      nameRecipes: 'Стейк из говядины по-грузински с картошкой',
+      timeCook: '1 час 15 минут',
+      imgRecipes: 'assets/img/steak.jpg'),
+  Recipes(
+      nameRecipes: 'Тосты с голубикой и бананом',
+      timeCook: '45 минут',
+      imgRecipes: 'assets/img/toast.jpg'),
+  Recipes(
+      nameRecipes: 'Паста с морепродуктами',
+      timeCook: '25 минут',
+      imgRecipes: 'assets/img/pasta.jpg'),
+  Recipes(
+      nameRecipes: 'Бургер с двумя котлетами',
+      timeCook: '1 час',
+      imgRecipes: 'assets/img/burger.jpg'),
+  Recipes(
+      nameRecipes: 'Пицца Маргарита домашняя',
+      timeCook: '25 минут',
+      imgRecipes: 'assets/img/pizza.jpg'),
 ];
 
 class Recipes {
@@ -19,36 +40,22 @@ class Recipes {
   final String timeCook;
   final String imgRecipes;
 
-  /* String get nameRecipe => _nameRecipes;
-
-  set nameRecipe (String name){
-    if (name.length > 5) {
-      _nameRecipes = name.characters.take(5);
-      return _nameRecipes;
-    }
-  } */
-
   Recipes({
     required this.nameRecipes,
     required this.timeCook,
     required this.imgRecipes,
-  }) ; //:  _nameRecipes = 'text';
-
-  
-  //void set nameRecipe(String nameRecipes) => (nameRecipes.length > 5) ? (_nameRecipes = (nameRecipes.characters.take(5).toString()) + '...') : _nameRecipes = 'nameRecipes';
+  });
 }
 
 List StepRecipesSalmon = <String>[
-'В маленькой кастрюле соедините соевый соус, 6 столовых ложек воды, мёд, сахар, измельчённый чеснок, имбирь и лимонный сок.',
-'Поставьте на средний огонь и, помешивая, доведите до лёгкого кипения.',
-'Смешайте оставшуюся воду с крахмалом. Добавьте в кастрюлю и перемешайте.',
-'Готовьте, непрерывно помешивая венчиком, 1 минуту. Снимите с огня и немного остудите.',
-'Смажьте форму маслом и выложите туда рыбу. Полейте её соусом.',
-'Поставьте в разогретую до 200 °C духовку примерно на 15 минут.',
-'Перед подачей полейте соусом из формы и посыпьте кунжутом.',
+  'В маленькой кастрюле соедините соевый соус, 6 столовых ложек воды, мёд, сахар, измельчённый чеснок, имбирь и лимонный сок.',
+  'Поставьте на средний огонь и, помешивая, доведите до лёгкого кипения.',
+  'Смешайте оставшуюся воду с крахмалом. Добавьте в кастрюлю и перемешайте.',
+  'Готовьте, непрерывно помешивая венчиком, 1 минуту. Снимите с огня и немного остудите.',
+  'Смажьте форму маслом и выложите туда рыбу. Полейте её соусом.',
+  'Поставьте в разогретую до 200 °C духовку примерно на 15 минут.',
+  'Перед подачей полейте соусом из формы и посыпьте кунжутом.',
 ];
-
-
 
 class ListRecipes extends StatefulWidget {
   const ListRecipes({super.key});
@@ -58,7 +65,6 @@ class ListRecipes extends StatefulWidget {
 }
 
 class _ListRecipesState extends State<ListRecipes> {
-  
   /* void _onRecipeTap(int index) {
     var id = _recipes[index].id;
     if (id == 1) {
@@ -85,63 +91,89 @@ class _ListRecipesState extends State<ListRecipes> {
           ),
         ],
       ),
-      body: ListView.builder(itemCount: myRecipes.length, itemBuilder: (BuildContext context, int index) {
-        final recipeImg = myRecipes[index].imgRecipes;
-        final recipeTime = myRecipes[index].timeCook;
-        String name = myRecipes[index].nameRecipes;
-        final recipeName = (name.length > 32) ? '${name.characters.take(32)}...' : (name);
-        return SafeArea(minimum: const EdgeInsets.fromLTRB(16, 15, 16, 0),
-          child: InkWell(
-          //borderRadius: BorderRadius.circular(10),  
-          //splashColor: Colors.blue.withAlpha(30),
-          onTap: () {print(index);
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => InfoRecipes(index),
-              )
-            );
-          }, 
-          child: Card(elevation: 0,
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                color: Theme.of(context).colorScheme.outline,
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(12)),
-            
-              ), child: Row( children: [
-              Column( children: [
-                Image.asset(recipeImg, width: 149, height: 136, fit: BoxFit.cover,),
-              ],),
-              SizedBox(width: 16,),
-              Flexible( child: 
-                Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 10,),
-                    Text(recipeName, style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500 )),
-                    SizedBox(height: 10,),
-                    Row( children: [
-                      Icon(Icons.access_time),
-                      SizedBox(width: 15,),
-                      Text(recipeTime, style: TextStyle(color: Color(0xff2ECC71)),),
-                    ],),
-                    SizedBox(height: 10,),
-                  ],
-                ),
-              ),
-              
-            ],),
-            
-            
-            
-          )));
-        
-          
-        
-        
-        
-             /*  ListTile( 
+      body: ListView.builder(
+          itemCount: myRecipes.length,
+          itemBuilder: (BuildContext context, int index) {
+            final recipeImg = myRecipes[index].imgRecipes;
+            final recipeTime = myRecipes[index].timeCook;
+            String name = myRecipes[index].nameRecipes;
+            final recipeName =
+                (name.length > 32) ? '${name.characters.take(32)}...' : (name);
+            return SafeArea(
+                minimum: const EdgeInsets.fromLTRB(16, 15, 16, 0),
+                child: InkWell(
+                    //borderRadius: BorderRadius.circular(10),
+                    //splashColor: Colors.blue.withAlpha(30),
+                    onTap: () {
+                      print(index);
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => InfoRecipes(index),
+                      ));
+                    },
+                    child: Card(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                      ),
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              Image.asset(
+                                recipeImg,
+                                width: 149,
+                                height: 136,
+                                fit: BoxFit.cover,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: 16,
+                          ),
+                          Flexible(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(recipeName,
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w500)),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(Icons.access_time),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      recipeTime,
+                                      style:
+                                          TextStyle(color: Color(0xff2ECC71)),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    )));
+
+            /*  ListTile( 
                 onTap: () {},
                 tileColor: Color(0xFFFF00000),
                 leading: Image.asset(recipeImg, width: 149, height: 136, fit: BoxFit.cover,),
@@ -152,15 +184,8 @@ class _ListRecipesState extends State<ListRecipes> {
                   Text(recipeTime),
                    ],),
             ); */
-          
-        
-          
-      }),
-      
-      
-      
-      
-      
+          }),
+
       /* Stack(children: [
         Container(
           constraints: const BoxConstraints(maxWidth: double.infinity),

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food/pages/infoRecipes/infoRecipes.dart';
+//import 'package:otus_food/pages/infoRecipes/infoRecipes.dart';
 import 'package:otus_food/pages/listRecipes/listRecipes.dart';
-
-
 
 void main() {
   runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,14 +12,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: Theme.of(context).copyWith(scaffoldBackgroundColor: Color(0xffececec6)),
+      theme: Theme.of(context)
+          .copyWith(scaffoldBackgroundColor: Color(0xffececec6)),
       //Theme.of(context).copyWith(bottomNavigationBarTheme: Color(0xff2ECC71))
       //home: ListRecipes(),
       //initialRoute: '/',
       routes: {
         '/': (context) => const ListRecipes(),
         //'/infoRecipes': (context) => InfoRecipes(index),
-       // '/log_in': (context) => LogIn(),
+        // '/log_in': (context) => LogIn(),
       },
     );
   }
