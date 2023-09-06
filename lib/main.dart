@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 //import 'package:otus_food/pages/infoRecipes/infoRecipes.dart';
 import 'package:otus_food/pages/listRecipes/listRecipes.dart';
+import 'package:otus_food/pages/log_in/log_in.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const ListRecipes(),
         //'/infoRecipes': (context) => InfoRecipes(index),
-        // '/log_in': (context) => LogIn(),
+        '/log_in': (context) => LogIn(),
       },
     );
   }

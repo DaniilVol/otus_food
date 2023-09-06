@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food/pages/log_in/log_in.dart';
 
 import '../infoRecipes/infoRecipes.dart';
 
@@ -77,6 +78,7 @@ class _ListRecipesState extends State<ListRecipes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // int _selextedIndex = 0
       //backgroundColor: Color(0xffececec6),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Color(0xff2ECC71),
@@ -88,8 +90,11 @@ class _ListRecipesState extends State<ListRecipes> {
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_rounded),
             label: 'Вход',
+            activeIcon: LogIn(),
           ),
         ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
       body: ListView.builder(
           itemCount: myRecipes.length,

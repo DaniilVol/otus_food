@@ -7,7 +7,7 @@ class MyStep extends StatefulWidget {
   int index;
   String text;
   //List step;
-  MyStep({required int this.index, required String this.text});
+  MyStep({super.key, required int this.index, required String this.text});
 
   @override
   State<MyStep> createState() => _MyStepState();
@@ -24,7 +24,7 @@ class _MyStepState extends State<MyStep> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Column(children: [
               Text(
-                '${this.widget.index}',
+                '${this.widget.index + 1}',
                 style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w900,
@@ -56,4 +56,12 @@ class _MyStepState extends State<MyStep> {
           ]),
         ));
   }
+}
+
+Widget allStep() {
+  List<Widget> list = <Widget>[];
+  for (var i = 0; i < stepRecipesSalmon.length; i++) {
+    list.add(MyStep(index: i, text: stepRecipesSalmon[i]));
+  }
+  return Column(children: list);
 }
