@@ -1,13 +1,13 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:otus_food/pages/listRecipes/listRecipes.dart';
+import 'package:otus_food/data/data.dart';
+
+// виджет отрисовки одной карточки шага приготовления
 
 class MyStep extends StatefulWidget {
-  int index;
-  String text;
+  final index;
+  final text;
   //List step;
-  MyStep({super.key, required int this.index, required String this.text});
+  const MyStep({super.key, required int this.index, required String this.text});
 
   @override
   State<MyStep> createState() => _MyStepState();
@@ -17,15 +17,15 @@ class _MyStepState extends State<MyStep> {
   @override
   Widget build(Object context) {
     return Card(
-        color: Color(0xffececec),
+        color: const Color(0xffececec),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Column(children: [
               Text(
-                '${this.widget.index + 1}',
-                style: TextStyle(
+                '${widget.index + 1}',
+                style: const TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w900,
                     color: Color(0xffc2c2c2)),
@@ -35,8 +35,8 @@ class _MyStepState extends State<MyStep> {
               child: Column(children: [
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child:
-                      Text(widget.text, style: TextStyle(color: Colors.black)),
+                  child: Text(widget.text,
+                      style: const TextStyle(color: Colors.black)),
                 )
               ]),
             ),
@@ -45,10 +45,10 @@ class _MyStepState extends State<MyStep> {
                 Row(children: [
                   Checkbox(value: false, onChanged: (_) {}),
                 ]),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Row(
+                const Row(
                   children: [Text('02:00')],
                 ),
               ],
@@ -57,6 +57,8 @@ class _MyStepState extends State<MyStep> {
         ));
   }
 }
+
+// виджет отрисовки всех шагов приготовления
 
 Widget allStep() {
   List<Widget> list = <Widget>[];

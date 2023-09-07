@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:otus_food/pages/infoRecipes/step_recipes.dart';
-import 'package:otus_food/pages/listRecipes/listRecipes.dart';
+import 'package:otus_food/data/data.dart';
+import 'package:otus_food/pages/info_recipes/step_recipes.dart';
 
 class InfoRecipes extends StatefulWidget {
   final int index;
@@ -19,7 +18,7 @@ class _InfoRecipesState extends State<InfoRecipes> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         toolbarHeight: 60,
-        title: Text('Рецепт'),
+        title: const Text('Рецепт'),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 216, 216, 216),
         //iconTheme: Theme.of(context).copyWith() ,
@@ -29,7 +28,7 @@ class _InfoRecipesState extends State<InfoRecipes> {
             minimum: EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(
@@ -38,33 +37,33 @@ class _InfoRecipesState extends State<InfoRecipes> {
                     Flexible(
                         child: Text(
                       myRecipes[widget.index].nameRecipes,
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                      style: const TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.w500),
                     )),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(Icons.access_time),
-                    SizedBox(
+                    const Icon(Icons.access_time),
+                    const SizedBox(
                       width: 10,
                     ),
-                    Text(myRecipes[widget.index].timeCook,
-                        style: TextStyle(
+                    Text(myRecipes[widget.index].timeRecipes,
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
                           color: Color(0xff2ECC71),
                         )),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(
@@ -78,20 +77,20 @@ class _InfoRecipesState extends State<InfoRecipes> {
                         ))
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 22.5,
                 ),
-                Row(
+                const Row(
                   children: [
                     Text('Ингридиенты',
                         style:
                             TextStyle(fontSize: 16, color: Color(0xff165932))),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 19,
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
@@ -108,17 +107,17 @@ class _InfoRecipesState extends State<InfoRecipes> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 19,
                 ),
-                Row(
+                const Row(
                   children: [
                     Text('Шаги приготовления',
                         style:
                             TextStyle(fontSize: 16, color: Color(0xff165932))),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 allStep(),

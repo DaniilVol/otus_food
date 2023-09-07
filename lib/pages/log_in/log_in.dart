@@ -11,21 +11,9 @@ class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Color(0xff2ECC71),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_pizza),
-            label: 'Рецепты',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_rounded),
-            label: 'Вход',
-          ),
-        ],
-      ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'OTUS.FOOD',

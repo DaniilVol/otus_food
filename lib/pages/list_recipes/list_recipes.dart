@@ -1,62 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food/data/data.dart';
 import 'package:otus_food/pages/log_in/log_in.dart';
 
-import '../infoRecipes/infoRecipes.dart';
+import '../info_recipes/info_recipes.dart';
 
 //import '../resources/resources.dart';
-
-List<Recipes> myRecipes = [
-  Recipes(
-      nameRecipes: 'Лосось в соусе терияки',
-      timeCook: '45 минут',
-      imgRecipes: 'assets/img/salmon.jpg'),
-  Recipes(
-      nameRecipes: 'Поке боул с сыром тофу',
-      timeCook: '30 минут',
-      imgRecipes: 'assets/img/poke.jpeg'),
-  Recipes(
-      nameRecipes: 'Стейк из говядины по-грузински с картошкой',
-      timeCook: '1 час 15 минут',
-      imgRecipes: 'assets/img/steak.jpg'),
-  Recipes(
-      nameRecipes: 'Тосты с голубикой и бананом',
-      timeCook: '45 минут',
-      imgRecipes: 'assets/img/toast.jpg'),
-  Recipes(
-      nameRecipes: 'Паста с морепродуктами',
-      timeCook: '25 минут',
-      imgRecipes: 'assets/img/pasta.jpg'),
-  Recipes(
-      nameRecipes: 'Бургер с двумя котлетами',
-      timeCook: '1 час',
-      imgRecipes: 'assets/img/burger.jpg'),
-  Recipes(
-      nameRecipes: 'Пицца Маргарита домашняя',
-      timeCook: '25 минут',
-      imgRecipes: 'assets/img/pizza.jpg'),
-];
-
-class Recipes {
-  final String nameRecipes;
-  final String timeCook;
-  final String imgRecipes;
-
-  Recipes({
-    required this.nameRecipes,
-    required this.timeCook,
-    required this.imgRecipes,
-  });
-}
-
-List stepRecipesSalmon = <String>[
-  'В маленькой кастрюле соедините соевый соус, 6 столовых ложек воды, мёд, сахар, измельчённый чеснок, имбирь и лимонный сок.',
-  'Поставьте на средний огонь и, помешивая, доведите до лёгкого кипения.',
-  'Смешайте оставшуюся воду с крахмалом. Добавьте в кастрюлю и перемешайте.',
-  'Готовьте, непрерывно помешивая венчиком, 1 минуту. Снимите с огня и немного остудите.',
-  'Смажьте форму маслом и выложите туда рыбу. Полейте её соусом.',
-  'Поставьте в разогретую до 200 °C духовку примерно на 15 минут.',
-  'Перед подачей полейте соусом из формы и посыпьте кунжутом.',
-];
 
 class ListRecipes extends StatefulWidget {
   const ListRecipes({super.key});
@@ -66,22 +14,15 @@ class ListRecipes extends StatefulWidget {
 }
 
 class _ListRecipesState extends State<ListRecipes> {
-  /* void _onRecipeTap(int index) {
-    var id = _recipes[index].id;
-    if (id == 1) {
-      Navigator.pushNamed(context, '/recipeInfo');
-    } else if (id == 2) {
-      Navigator.pushNamed(context, '/recipeInfoPokeboul');
-    }
-  } */
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // int _selextedIndex = 0
+      /* // int _selextedIndex = 0
       //backgroundColor: Color(0xffececec6),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Color(0xff2ECC71),
+        // currentIndex: ,
+        onTap: (_) {},
+        selectedItemColor: const Color(0xff2ECC71),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.local_pizza),
@@ -90,17 +31,16 @@ class _ListRecipesState extends State<ListRecipes> {
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_rounded),
             label: 'Вход',
-            activeIcon: LogIn(),
           ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
+        //currentIndex: _selectedIndex,
+        //onTap: _onItemTapped,
+      ), */
       body: ListView.builder(
           itemCount: myRecipes.length,
           itemBuilder: (BuildContext context, int index) {
             final recipeImg = myRecipes[index].imgRecipes;
-            final recipeTime = myRecipes[index].timeCook;
+            final recipeTime = myRecipes[index].timeRecipes;
             String name = myRecipes[index].nameRecipes;
             final recipeName =
                 (name.length > 32) ? '${name.characters.take(32)}...' : (name);
@@ -177,18 +117,6 @@ class _ListRecipesState extends State<ListRecipes> {
                         ],
                       ),
                     )));
-
-            /*  ListTile( 
-                onTap: () {},
-                tileColor: Color(0xFFFF00000),
-                leading: Image.asset(recipeImg, width: 149, height: 136, fit: BoxFit.cover,),
-                title: Text(recipeName),
-                subtitle: Row(children: [
-                  Icon(Icons.access_time),
-                  SizedBox(width: 20,),
-                  Text(recipeTime),
-                   ],),
-            ); */
           }),
 
       /* Stack(children: [
@@ -252,7 +180,7 @@ class _ListRecipesState extends State<ListRecipes> {
                             child: SizedBox(
                               height: 19,
                               child: Text(
-                                recipes.timeCook,
+                                recipes.timeRecipes,
                                 style: const TextStyle(
                                     color: Color(0xff2ECC71), fontSize: 16),
                               ),
