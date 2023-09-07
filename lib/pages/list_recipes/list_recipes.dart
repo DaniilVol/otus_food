@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/data/data.dart';
-import 'package:otus_food/pages/log_in/log_in.dart';
 
 import '../info_recipes/info_recipes.dart';
 
@@ -76,7 +75,7 @@ class _ListRecipesState extends State<ListRecipes> {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 16,
                           ),
                           Flexible(
@@ -85,30 +84,30 @@ class _ListRecipesState extends State<ListRecipes> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Text(recipeName,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.w500)),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.access_time),
-                                    SizedBox(
+                                    const Icon(Icons.access_time),
+                                    const SizedBox(
                                       width: 15,
                                     ),
                                     Text(
                                       recipeTime,
-                                      style:
-                                          TextStyle(color: Color(0xff2ECC71)),
+                                      style: const TextStyle(
+                                          color: Color(0xff2ECC71)),
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                               ],
