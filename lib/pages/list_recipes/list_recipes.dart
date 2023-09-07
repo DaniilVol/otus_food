@@ -16,25 +16,6 @@ class _ListRecipesState extends State<ListRecipes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /* // int _selextedIndex = 0
-      //backgroundColor: Color(0xffececec6),
-      bottomNavigationBar: BottomNavigationBar(
-        // currentIndex: ,
-        onTap: (_) {},
-        selectedItemColor: const Color(0xff2ECC71),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_pizza),
-            label: 'Рецепты',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_rounded),
-            label: 'Вход',
-          ),
-        ],
-        //currentIndex: _selectedIndex,
-        //onTap: _onItemTapped,
-      ), */
       body: ListView.builder(
           itemCount: myRecipes.length,
           itemBuilder: (BuildContext context, int index) {
@@ -49,9 +30,9 @@ class _ListRecipesState extends State<ListRecipes> {
                     //borderRadius: BorderRadius.circular(10),
                     //splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      print(index);
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => InfoRecipes(index),
+                        builder: (context) => InfoRecipes(
+                            index), // можно ли так передавать в виджет параметры?
                       ));
                     },
                     child: Card(

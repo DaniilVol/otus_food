@@ -120,7 +120,8 @@ class _InfoRecipesState extends State<InfoRecipes> {
                 const SizedBox(
                   height: 20,
                 ),
-                allStep(),
+                allStep(widget
+                    .index), // создает список шагов, передаем индекс рецепта по которому нажали
               ],
             ))
       ]),

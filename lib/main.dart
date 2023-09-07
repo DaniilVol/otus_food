@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-//import 'package:otus_food/pages/infoRecipes/infoRecipes.dart';
+import 'package:otus_food/data/data.dart';
 import 'package:otus_food/pages/log_in/log_in.dart';
 import 'package:otus_food/pages/main_page.dart';
 
 void main() {
   runApp(const MyApp());
+  print(myRecipes[0].stepRecipes[0]);
 }
 
 class MyApp extends StatelessWidget {

@@ -4,10 +4,10 @@ import 'package:otus_food/data/data.dart';
 // виджет отрисовки одной карточки шага приготовления
 
 class MyStep extends StatefulWidget {
-  final index;
-  final text;
-  //List step;
-  const MyStep({super.key, required int this.index, required String this.text});
+  final idStep;
+  final idRecipe;
+  const MyStep(
+      {super.key, required int this.idStep, required int this.idRecipe});
 
   @override
   State<MyStep> createState() => _MyStepState();
@@ -24,7 +24,7 @@ class _MyStepState extends State<MyStep> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Column(children: [
               Text(
-                '${widget.index + 1}',
+                '${widget.idStep + 1}',
                 style: const TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w900,
@@ -35,7 +35,9 @@ class _MyStepState extends State<MyStep> {
               child: Column(children: [
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Text(widget.text,
+                  child: Text(
+                      myRecipes[widget.idRecipe].stepRecipes[widget
+                          .idStep], // выбираем из списка нужный рецепт и нужный шаг
                       style: const TextStyle(color: Colors.black)),
                 )
               ]),
@@ -48,8 +50,11 @@ class _MyStepState extends State<MyStep> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Row(
-                  children: [Text('02:00')],
+                Row(
+                  children: [
+                    Text(myRecipes[widget.idRecipe]
+                        .stepTimeRecipes[widget.idStep])
+                  ], // берем из списка рецептов, время шага
                 ),
               ],
             )
@@ -60,10 +65,13 @@ class _MyStepState extends State<MyStep> {
 
 // виджет отрисовки всех шагов приготовления
 
-Widget allStep() {
+Widget allStep(int index) {
   List<Widget> list = <Widget>[];
-  for (var i = 0; i < stepRecipesSalmon.length; i++) {
-    list.add(MyStep(index: i, text: stepRecipesSalmon[i]));
+  for (var i = 0; i < myRecipes[index].stepRecipes.length; i++) {
+    list.add(MyStep(
+      idStep: i,
+      idRecipe: index,
+    ));
   }
   return Column(children: list);
 }
