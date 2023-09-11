@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food/data/data.dart';
+import 'package:otus_food/data/data_recipes.dart';
 
 // виджет отрисовки одной карточки шага приготовления
 
@@ -52,9 +52,10 @@ class _MyStepState extends State<MyStep> {
                 ),
                 Row(
                   children: [
-                    Text(myRecipes[widget.idRecipe]
-                        .stepTimeRecipes[widget.idStep])
-                  ], // берем из списка рецептов, время шага
+                    Text(myRecipes[widget.idRecipe].stepTimeRecipes[widget
+                            .idStep] // берем из списка рецептов, время шага
+                        )
+                  ],
                 ),
               ],
             )
@@ -69,6 +70,7 @@ Widget allStep(int index) {
   List<Widget> list = <Widget>[];
   for (var i = 0; i < myRecipes[index].stepRecipes.length; i++) {
     list.add(MyStep(
+      // передаем в список виджет с новым шагом приготовления
       idStep: i,
       idRecipe: index,
     ));

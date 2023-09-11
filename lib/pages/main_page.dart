@@ -1,36 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/pages/list_recipes/list_recipes.dart';
-import 'package:otus_food/pages/log_in/log_in.dart';
+import 'package:otus_food/pages/log_enter/log_in.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
   @override
-  State<MainPage> createState() => _MainPage();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _MainPage extends State<MainPage> {
-  List pages = [
-    ListRecipes(),
-    LogIn(),
+class _MainPageState extends State<MainPage> {
+  final List _pages = [
+    const ListRecipes(),
+    const LogIn(),
   ];
 
-  int currentIndex = 0;
-  void OnTap(int index) {
+  int _currentIndex = 0;
+  void onTap(int index) {
     setState(() {
-      currentIndex = index;
+      _currentIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: pages[currentIndex],
-        // int _selextedIndex = 0
-        //backgroundColor: Color(0xffececec6),
+        body: _pages[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: OnTap,
+          currentIndex: _currentIndex,
+          onTap: onTap,
           selectedItemColor: const Color(0xff2ECC71),
           items: const [
             BottomNavigationBarItem(

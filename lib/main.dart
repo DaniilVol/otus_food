@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food/data/data.dart';
-import 'package:otus_food/pages/log_in/log_in.dart';
+import 'package:otus_food/pages/log_enter/log_in.dart';
+import 'package:otus_food/pages/log_enter/log_reg.dart';
 import 'package:otus_food/pages/main_page.dart';
 
 void main() {
   runApp(const MyApp());
-  print(myRecipes[0].stepRecipes[0]);
 }
 
 class MyApp extends StatelessWidget {
@@ -21,8 +20,10 @@ class MyApp extends StatelessWidget {
       //initialRoute: '/',
       routes: {
         '/': (context) => const MainPage(),
-        //'/infoRecipes': (context) => InfoRecipes(index),
+        // '/infoRecipes': (context) => InfoRecipes(index),
+        // '/log_enter': (context) => LogEnter(0),
         '/log_in': (context) => const LogIn(),
+        '/log_reg': (context) => const LogReg(),
       },
     );
   }

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food/data/data.dart';
-
+import 'package:otus_food/data/data_recipes.dart';
 import '../info_recipes/info_recipes.dart';
-
-//import '../resources/resources.dart';
 
 class ListRecipes extends StatefulWidget {
   const ListRecipes({super.key});

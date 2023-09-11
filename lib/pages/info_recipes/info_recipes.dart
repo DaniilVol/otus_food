@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food/data/data.dart';
+import 'package:otus_food/data/data_recipes.dart';
 import 'package:otus_food/pages/info_recipes/step_recipes.dart';
 
 class InfoRecipes extends StatefulWidget {
@@ -25,7 +25,7 @@ class _InfoRecipesState extends State<InfoRecipes> {
       ),
       body: ListView(children: [
         SafeArea(
-            minimum: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            minimum: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Column(
               children: [
                 const SizedBox(
