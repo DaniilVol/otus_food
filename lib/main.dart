@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/pages/log_enter/log_in.dart';
 import 'package:otus_food/pages/log_enter/log_reg.dart';
-import 'package:otus_food/pages/main_page.dart';
+import 'package:otus_food/pages/main/main_page.dart';
 
 void main() {
   runApp(const MyApp());

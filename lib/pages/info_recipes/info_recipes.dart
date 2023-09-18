@@ -2,16 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:otus_food/data/data_recipes.dart';
 import 'package:otus_food/pages/info_recipes/step_recipes.dart';
 
-class InfoRecipes extends StatefulWidget {
+class Ingredient {
+  int index;
+
+  String get name => myRecipes[index]
+      .ingNameRecipes
+      .fold('', (previousValue, element) => '$previousValue\u2022 $element\n');
+  // .reduce((value, element) => '$value\u2022$element\n');
+  String get value => myRecipes[index]
+      .ingValueRecipes
+      .fold('', (previousValue, element) => '$previousValue$element\n');
+  //.reduce((value, element) => '$value\n$element');
+
+  Ingredient({required this.index});
+}
+
+// экран
+
+class InfoRecipes extends StatelessWidget {
   final int index;
   const InfoRecipes(this.index, {super.key});
 
-  @override
-  State<InfoRecipes> createState() => _InfoRecipesState();
-}
-
-class _InfoRecipesState extends State<InfoRecipes> {
-  //var index = index;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +47,7 @@ class _InfoRecipesState extends State<InfoRecipes> {
                   children: [
                     Flexible(
                         child: Text(
-                      myRecipes[widget.index].nameRecipes,
+                      myRecipes[index].nameRecipes,
                       style: const TextStyle(
                           fontSize: 24, fontWeight: FontWeight.w500),
                     )),
@@ -55,7 +66,7 @@ class _InfoRecipesState extends State<InfoRecipes> {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text(myRecipes[widget.index].timeRecipes,
+                    Text(myRecipes[index].timeRecipes,
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
@@ -71,7 +82,7 @@ class _InfoRecipesState extends State<InfoRecipes> {
                     Flexible(
                         fit: FlexFit.tight,
                         child: Image.asset(
-                          myRecipes[widget.index].imgRecipes,
+                          myRecipes[index].imgRecipes,
                           height: 220,
                           fit: BoxFit.cover,
                         ))
@@ -90,20 +101,17 @@ class _InfoRecipesState extends State<InfoRecipes> {
                 const SizedBox(
                   height: 19,
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  verticalDirection: VerticalDirection.up,
                   children: [
                     Column(
                       children: [
-                        Text(
-                            '\u2022  Соевый соус\n\u2022  Вода\n\u2022  Мёд\n\u2022  Коричневый сахар\n\u2022  Чеснок \n\u2022  Тёртый свежий имбирь\n\u2022  Лимонный сок\n\u2022  Кукурузный крахмал\n\u2022  Растительное масло\n\u2022  Филе лосося или сёмги\n\u2022  Кунжут'),
+                        Text(Ingredient(index: index).name),
                       ],
                     ),
                     Column(
-                      children: [
-                        Text(
-                            '8 ст. ложек\n8 ст. ложек\n3 ст. ложки\n2 ст. ложки\n3 зубчика\n1 ст. ложка\n1¹⁄₂ ст. ложки\n1 ст. ложка\n1 ч. ложка\n680 г\nпо вкусу'),
-                      ],
+                      children: [Text(Ingredient(index: index).value)],
                     ),
                   ],
                 ),
@@ -120,8 +128,14 @@ class _InfoRecipesState extends State<InfoRecipes> {
                 const SizedBox(
                   height: 20,
                 ),
-                allStep(widget
-                    .index), // создает список шагов, передаем индекс рецепта по которому нажали
+                Column(
+                  children: ListStepData(
+                          index:
+                              index) // передаем индекс выбранного рецепта для создания списка виджетов шагов рецепта
+                      .listStepData
+                      .map((e) => StepWidget(stepData: e))
+                      .toList(),
+                )
               ],
             ))
       ]),

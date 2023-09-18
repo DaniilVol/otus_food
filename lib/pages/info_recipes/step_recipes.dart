@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/data/data_recipes.dart';
 
-// виджет отрисовки одной карточки шага приготовления
+// класс для создания шага
+class StepData {
+  final int stepNum;
+  final String stepText;
+  final String stepTime;
 
-class MyStep extends StatefulWidget {
-  final idStep;
-  final idRecipe;
-  const MyStep(
-      {super.key, required int this.idStep, required int this.idRecipe});
-
-  @override
-  State<MyStep> createState() => _MyStepState();
+  StepData(
+      {required this.stepNum, required this.stepText, required this.stepTime});
 }
 
-class _MyStepState extends State<MyStep> {
+// виджет отрисовки одного шага приготовления
+
+class StepWidget extends StatefulWidget {
+  final StepData stepData;
+  const StepWidget({required this.stepData, super.key});
+
+  @override
+  State<StepWidget> createState() => _StepWidgetState();
+}
+
+class _StepWidgetState extends State<StepWidget> {
   @override
   Widget build(Object context) {
     return Card(
@@ -24,7 +32,7 @@ class _MyStepState extends State<MyStep> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Column(children: [
               Text(
-                '${widget.idStep + 1}',
+                '${widget.stepData.stepNum}',
                 style: const TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w900,
@@ -35,9 +43,7 @@ class _MyStepState extends State<MyStep> {
               child: Column(children: [
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                      myRecipes[widget.idRecipe].stepRecipes[widget
-                          .idStep], // выбираем из списка нужный рецепт и нужный шаг
+                  child: Text(widget.stepData.stepText,
                       style: const TextStyle(color: Colors.black)),
                 )
               ]),
@@ -52,9 +58,7 @@ class _MyStepState extends State<MyStep> {
                 ),
                 Row(
                   children: [
-                    Text(myRecipes[widget.idRecipe].stepTimeRecipes[widget
-                            .idStep] // берем из списка рецептов, время шага
-                        )
+                    Text(widget.stepData.stepTime),
                   ],
                 ),
               ],
@@ -64,16 +68,28 @@ class _MyStepState extends State<MyStep> {
   }
 }
 
-// виджет отрисовки всех шагов приготовления
+// список шагов
 
-Widget allStep(int index) {
-  List<Widget> list = <Widget>[];
-  for (var i = 0; i < myRecipes[index].stepRecipes.length; i++) {
-    list.add(MyStep(
-      // передаем в список виджет с новым шагом приготовления
-      idStep: i,
-      idRecipe: index,
-    ));
+class ListStepData {
+  int index;
+
+  List<StepData> get listStepData {
+    List<StepData> list = [];
+    // проверяем колличество текстовых полей и полей времени
+    if (myRecipes[index].stepTextRecipes.length ==
+        myRecipes[index].stepTimeRecipes.length) {
+      for (int i = 0; i < myRecipes[index].stepTextRecipes.length; i++) {
+        list.add(StepData(
+            stepNum: i + 1,
+            stepText: myRecipes[index].stepTextRecipes[i],
+            stepTime: myRecipes[index].stepTimeRecipes[i]));
+      }
+    } else {
+      throw Exception('Колличество шагов текста и времени не совпадает');
+    }
+    return list;
   }
-  return Column(children: list);
+
+  // в конструктор передаем индекс нажатого рецепта и берем его данные о шагах рецепта
+  ListStepData({required this.index});
 }

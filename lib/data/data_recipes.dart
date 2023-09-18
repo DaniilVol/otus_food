@@ -12,7 +12,7 @@ List<Recipes> myRecipes = [
         '15:00',
         '04:00'
       ],
-      stepRecipes: [
+      stepTextRecipes: [
         'В маленькой кастрюле соедините соевый соус, 6 столовых ложек воды, мёд, сахар, измельчённый чеснок, имбирь и лимонный сок.',
         'Поставьте на средний огонь и, помешивая, доведите до лёгкого кипения.',
         'Смешайте оставшуюся воду с крахмалом. Добавьте в кастрюлю и перемешайте.',
@@ -51,14 +51,16 @@ class Recipes {
   final String nameRecipes;
   final String timeRecipes;
   final String imgRecipes;
-  final List stepRecipes;
-  final List stepTimeRecipes;
+  final List<String> stepTextRecipes;
+  final List<String> stepTimeRecipes;
+  final List<String> ingNameRecipes;
+  final List<String> ingValueRecipes;
 
   Recipes({
     required this.nameRecipes,
     required this.timeRecipes,
     required this.imgRecipes,
-    this.stepRecipes = const [
+    this.stepTextRecipes = const [
       'В маленькой кастрюле соедините соевый соус, 6 столовых ложек воды, мёд, сахар, измельчённый чеснок, имбирь и лимонный сок.',
       'Поставьте на средний огонь и, помешивая, доведите до лёгкого кипения.',
       'Смешайте оставшуюся воду с крахмалом. Добавьте в кастрюлю и перемешайте.',
@@ -74,17 +76,43 @@ class Recipes {
       '01:00',
       '06:00',
       '15:00',
-      '04:00'
+      '04:00',
+    ],
+    this.ingNameRecipes = const [
+      'Соевый соус',
+      'Вода',
+      'Мёд',
+      'Коричневый сахар',
+      'Чеснок',
+      'Тёртый свежий имбирь',
+      'Лимонный сок',
+      'Кукурузный крахмал',
+      'Растительное масло',
+      'Филе лосося или сёмги',
+      'Кунжут'
+    ],
+    this.ingValueRecipes = const [
+      '8 ст. ложек',
+      '8 ст. ложек',
+      '3 ст. ложки',
+      '2 ст. ложки',
+      '3 зубчика',
+      '1 ст. ложка',
+      '1¹⁄₂ ст. ложки',
+      '1 ст. ложка',
+      '1 ч. ложка',
+      '680 г.',
+      'по вкусу',
     ],
   });
-}
 
-/* List stepRecipesSalmon = <String>[
-  'В маленькой кастрюле соедините соевый соус, 6 столовых ложек воды, мёд, сахар, измельчённый чеснок, имбирь и лимонный сок.',
-  'Поставьте на средний огонь и, помешивая, доведите до лёгкого кипения.',
-  'Смешайте оставшуюся воду с крахмалом. Добавьте в кастрюлю и перемешайте.',
-  'Готовьте, непрерывно помешивая венчиком, 1 минуту. Снимите с огня и немного остудите.',
-  'Смажьте форму маслом и выложите туда рыбу. Полейте её соусом.',
-  'Поставьте в разогретую до 200 °C духовку примерно на 15 минут.',
-  'Перед подачей полейте соусом из формы и посыпьте кунжутом.',
-]; */
+  Map<String, dynamic> toMap() {
+    return {
+      'nameRecipes': nameRecipes,
+      'timeRecipes': timeRecipes,
+      'imgRecipes': imgRecipes,
+      'stepTextRecipes': stepTextRecipes.toList(),
+      'stepTimeRecipes': stepTimeRecipes.toList(),
+    };
+  }
+}
