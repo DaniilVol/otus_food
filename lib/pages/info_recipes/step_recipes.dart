@@ -42,7 +42,7 @@ class _StepWidgetState extends State<StepWidget> {
             Flexible(
               child: Column(children: [
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Text(widget.stepData.stepText,
                       style: const TextStyle(color: Colors.black)),
                 )

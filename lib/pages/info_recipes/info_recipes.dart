@@ -106,11 +106,13 @@ class InfoRecipes extends StatelessWidget {
                   verticalDirection: VerticalDirection.up,
                   children: [
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(Ingredient(index: index).name),
                       ],
                     ),
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [Text(Ingredient(index: index).value)],
                     ),
                   ],
@@ -135,7 +137,26 @@ class InfoRecipes extends StatelessWidget {
                       .listStepData
                       .map((e) => StepWidget(stepData: e))
                       .toList(),
-                )
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30))),
+                      minimumSize:
+                          MaterialStateProperty.all(const Size(300, 50)),
+                      backgroundColor: MaterialStateProperty.all(
+                          const Color.fromARGB(255, 2, 56, 4)),
+                      elevation: MaterialStateProperty.all(0),
+                      splashFactory: NoSplash.splashFactory),
+                  child: const Text(
+                    'Начать готовить',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                ),
               ],
             ))
       ]),
