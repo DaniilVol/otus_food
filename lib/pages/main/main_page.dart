@@ -11,7 +11,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final List _pages = [
-    const ListRecipes(),
+    const ListRecipesWidget(),
     const LogIn(),
   ];
 
