@@ -1,85 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/data/data_recipes.dart';
+import 'package:otus_food/data/timer.dart';
+import 'package:otus_food/pages/info_recipes/ingredient_list.dart';
 import 'package:otus_food/pages/info_recipes/step_recipes.dart';
-
-/* class IngredientWidget2 {
-  int index;
-
-  String get name => myRecipes[index]
-      .ingNameRecipes
-      .fold('', (previousValue, element) => '$previousValue\u2022 $element\n');
-  // .reduce((value, element) => '$value\u2022$element\n');
-  String get value => myRecipes[index]
-      .ingValueRecipes
-      .fold('', (previousValue, element) => '$previousValue$element\n');
-  //.reduce((value, element) => '$value\n$element');
-
-  IngredientWidget2({required this.index});
-} */
-
-abstract class ListIngredient {
-  Widget list();
-}
-
-class ListIngredientName {
-  int index;
-  final List<String> _name = myRecipes[index].ingNameRecipes;
-  List<Widget> listIngredientNameData = [];
-  List get name => _name.map((e) => '\u2022 $e}').toList();
-
-  ListIngredientName({required this.index});
-}
-
-class ListIngredientValue extends ListIngredient {
-  int index;
-
-  ListIngredientValue({required this.index});
-
-  @override
-  Widget list() {
-    List<String> value = myRecipes[index].ingValueRecipes;
-    List<Widget> listIngredientValueData = [];
-    for (int i = 0; i < value.length; i++) {
-      listIngredientValueData.add(Row(
-        children: [
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: Text(value[i]))
-        ],
-      ));
-    }
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: listIngredientValueData.map((e) => e).toList());
-  }
-}
-
-class IngredientListWidget extends StatelessWidget {
-  int index;
-  IngredientListWidget({required this.index, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      verticalDirection: VerticalDirection.up,
-      children: [
-        Column(
-          children: ListIngredientName(index: index)
-              .list()
-              .map((text) => Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    child: Text(text),
-                  ))
-              .toList(),
-        ),
-        Column(
-          children: [],
-        ),
-      ],
-    );
-  }
-}
 
 // экран
 
@@ -162,13 +85,9 @@ class InfoRecipes extends StatelessWidget {
                             TextStyle(fontSize: 16, color: Color(0xff165932))),
                   ],
                 ),
-                const SizedBox(
-                  height: 19,
-                ),
+                /*  TimerRecipesWidget(
+                    startTimerStep: Duration(minutes: 2, seconds: 5)), */
                 IngredientListWidget(index: index),
-                const SizedBox(
-                  height: 19,
-                ),
                 const Row(
                   children: [
                     Text('Шаги приготовления',
