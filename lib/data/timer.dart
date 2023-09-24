@@ -6,16 +6,13 @@ class TimerRecipesWidget extends StatefulWidget {
   const TimerRecipesWidget({required this.startTimerStep, super.key});
 
   @override
-  State<TimerRecipesWidget> createState() =>
-      _TimerRecipesWidgetState(this.startTimerStep);
+  State<TimerRecipesWidget> createState() => _TimerRecipesWidgetState();
 }
 
 class _TimerRecipesWidgetState extends State<TimerRecipesWidget> {
   Timer? countDownTimer;
-  Duration start;
+  Duration? start;
   final Duration interval = const Duration(seconds: 1);
-
-  _TimerRecipesWidgetState(this.start);
 
   @override
   void initState() {
@@ -40,12 +37,12 @@ class _TimerRecipesWidgetState extends State<TimerRecipesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    int minute = start.inMinutes;
-    int second = start.inSeconds;
+    //int minute = start.inMinutes;
+    //int second = start.inSeconds;
     return Row(
       children: [
-        Text('$minute : $second'),
-        TextButton(onPressed: startTimer, child: Text('data'))
+        // Text('$minute : $second'),
+        TextButton(onPressed: startTimer, child: const Text('data')),
       ],
     );
   }

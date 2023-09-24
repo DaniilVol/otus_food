@@ -53,8 +53,8 @@ class Recipes {
   final String imgRecipes;
   final List<String> stepTextRecipes;
   final List<String> stepTimeRecipes;
-  final List<String> ingNameRecipes;
-  final List<String> ingValueRecipes;
+  final List<String> ingredientName;
+  final List<String> ingredientValue;
 
   Recipes({
     required this.nameRecipes,
@@ -78,7 +78,7 @@ class Recipes {
       '15:00',
       '04:00',
     ],
-    this.ingNameRecipes = const [
+    this.ingredientName = const [
       'Соевый соус',
       'Вода',
       'Мёд',
@@ -91,7 +91,7 @@ class Recipes {
       'Филе лосося или сёмги',
       'Кунжут'
     ],
-    this.ingValueRecipes = const [
+    this.ingredientValue = const [
       '8 ст. ложек',
       '8 ст. ложек',
       '3 ст. ложки',

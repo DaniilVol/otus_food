@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food/pages/log_enter/log_in.dart';
-import 'package:otus_food/pages/log_enter/log_reg.dart';
+import 'package:otus_food/pages/auth/auth.dart';
+import 'package:otus_food/pages/auth/auth_reg.dart';
 import 'package:otus_food/pages/main/main_page.dart';
 
 void main() {
@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => const MainPage(),
         // '/infoRecipes': (context) => InfoRecipes(index),
         // '/log_enter': (context) => LogEnter(0),
-        '/log_in': (context) => const LogIn(),
-        '/log_reg': (context) => const LogReg(),
+        '/log_in': (context) => const AuthWidget(),
+        '/log_reg': (context) => const AuthRegistration(),
       },
     );
   }
