@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/data/data_recipes.dart';
+import 'package:otus_food/data/timer.dart';
 
 // класс для создания шага
 class StepData {
@@ -58,7 +59,10 @@ class _StepWidgetState extends State<StepWidget> {
                 ),
                 Row(
                   children: [
-                    Text(widget.stepData.stepTime),
+                    TimerWidget(
+                        timeString: widget.stepData.stepTime,
+                        timerController: TimerController(
+                            timeString: widget.stepData.stepTime))
                   ],
                 ),
               ],
