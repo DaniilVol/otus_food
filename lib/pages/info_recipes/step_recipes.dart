@@ -15,14 +15,18 @@ class StepData {
 // виджет отрисовки одного шага приготовления
 
 class StepWidget extends StatefulWidget {
+  final TimerController allTimerController;
   final StepData stepData;
-  const StepWidget({required this.stepData, super.key});
+  StepWidget(
+      {required this.allTimerController, required this.stepData, super.key});
 
   @override
   State<StepWidget> createState() => _StepWidgetState();
 }
 
 class _StepWidgetState extends State<StepWidget> {
+  // bool isChecked = false;
+
   @override
   Widget build(Object context) {
     return Card(
@@ -49,23 +53,11 @@ class _StepWidgetState extends State<StepWidget> {
                 )
               ]),
             ),
-            Column(
-              children: [
-                Row(children: [
-                  Checkbox(value: false, onChanged: (_) {}),
-                ]),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    TimerWidget(
-                        timeString: widget.stepData.stepTime,
-                        timerController: TimerController(
-                            timeString: widget.stepData.stepTime))
-                  ],
-                ),
-              ],
+            TimerWidget(
+              timeString: widget.stepData.stepTime,
+              timerController:
+                  TimerController(timeString: widget.stepData.stepTime),
+              allTimerController: widget.allTimerController,
             )
           ]),
         ));

@@ -1,15 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/data/data_recipes.dart';
+import 'package:otus_food/data/timer.dart';
 import 'package:otus_food/pages/info_recipes/ingredient_list.dart';
 import 'package:otus_food/pages/info_recipes/step_recipes.dart';
 
 import '../favorites/favorites_data.dart';
 
+class AllTimer {
+  final int index;
+  final TimerController allTimerController =
+      TimerController(timeString: timeString);
+
+  AllTimer({required this.index});
+
+  List<String> get listTime {
+    return myRecipes[index].stepTimeRecipes;
+  }
+
+  String secondsToTime() {
+    int seconds = timeToSeconds();
+    int min = seconds ~/ 60;
+    int sec = seconds - min * 60;
+    return '${min < 10 ? '0$min' : min}:${sec < 10 ? '0$sec' : sec}';
+  }
+
+  int timeToSeconds() {
+    int initialValue = 0;
+    int seconds = 0;
+    int allSeconds = listTime.fold<int>(initialValue, (previousValue, element) {
+      List timeList = element.split(':');
+      seconds = seconds + int.parse(timeList[0]) * 60 + int.parse(timeList[1]);
+      print(seconds);
+      return seconds;
+    });
+    print(allSeconds);
+    return allSeconds;
+  }
+}
+
 // экран
 
 class InfoRecipes extends StatefulWidget {
   final int index;
-  const InfoRecipes(this.index, {super.key});
+
+  InfoRecipes({required this.index, super.key});
+
+  final String timeString = AllTimer(index: 0).secondsToTime();
+  final TimerController allTimerController =
+      TimerController(timeString: timeString);
 
   @override
   State<InfoRecipes> createState() => _InfoRecipesState();
@@ -77,6 +115,11 @@ class _InfoRecipesState extends State<InfoRecipes> {
                     Expanded(
                         child: Column(
                       children: [
+                        StreamBuilder(
+                            stream: widget.allTimerController.timer,
+                            initialData: '4',
+                            builder: ((context, snapshot) =>
+                                Text(snapshot.requireData))),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -175,7 +218,10 @@ class _InfoRecipesState extends State<InfoRecipes> {
                           index: widget
                               .index) // передаем индекс выбранного рецепта для создания списка виджетов шагов рецепта
                       .listStepData
-                      .map((e) => StepWidget(stepData: e))
+                      .map((e) => StepWidget(
+                            stepData: e,
+                            allTimerController: widget.allTimerController,
+                          ))
                       .toList(),
                 ),
                 const SizedBox(
