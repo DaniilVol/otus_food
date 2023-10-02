@@ -6,6 +6,7 @@ class TimerController {
   StreamController<String> streamController = StreamController();
   Stream<String> get timer => streamController.stream;
   StreamSubscription<String>? subscription;
+  bool onDoneStreamController = false;
 
   TimerController({required this.timeString});
 
@@ -15,8 +16,12 @@ class TimerController {
         Stream.periodic(const Duration(seconds: 1), (i) => timeInSeconds - i)
             .map(secondsToTime)
             .take(timeInSeconds + 1);
-    subscription =
-        timerPeriodic.listen((event) => streamController.sink.add(event));
+    subscription = timerPeriodic.take(timeInSeconds + 1).listen(
+          (event) => streamController.sink.add(event),
+          onDone: () => onDoneStreamController = true,
+        );
+    // print(streamController.isClosed);
+    //print(streamController.done);
   }
 
   void pause() {
@@ -84,10 +89,14 @@ class _TimerWidgetState extends State<TimerWidget> {
         Checkbox(
             value: isChecked,
             onChanged: (value) {
-              isChecked = value!;
-              widget.timerController.onChanged(isChecked);
-              widget.allTimerController.onChanged(isChecked);
-              setState(() {});
+              if (widget.timerController.onDoneStreamController == false) {
+                isChecked = value!;
+                widget.timerController.onChanged(isChecked);
+                widget.allTimerController.onChanged(isChecked);
+                setState(() {});
+              } else {
+                isChecked = true;
+              }
             }),
       ]),
       const SizedBox(
@@ -97,7 +106,12 @@ class _TimerWidgetState extends State<TimerWidget> {
         StreamBuilder(
             stream: widget.timerController.timer,
             initialData: widget.timeString,
-            builder: ((context, snapshot) => Text(snapshot.requireData))),
+            builder: ((context, snapshot) {
+              if (widget.timerController.onDoneStreamController == true) {
+                widget.allTimerController.onChanged(false);
+              }
+              return Text(snapshot.requireData);
+            })),
       ]),
     ]);
   }

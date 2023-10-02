@@ -17,7 +17,7 @@ class StepData {
 class StepWidget extends StatefulWidget {
   final TimerController allTimerController;
   final StepData stepData;
-  StepWidget(
+  const StepWidget(
       {required this.allTimerController, required this.stepData, super.key});
 
   @override

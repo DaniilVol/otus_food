@@ -54,8 +54,7 @@ class OneRecipesWidget extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => InfoRecipes(
-                    index:
-                        index), // можно ли так передавать в виджет параметры?
+                    index), // можно ли так передавать в виджет параметры?
               ));
             },
             child: Card(

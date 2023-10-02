@@ -6,34 +6,31 @@ import 'package:otus_food/pages/info_recipes/step_recipes.dart';
 
 import '../favorites/favorites_data.dart';
 
-class AllTimer {
-  final int index;
-  final TimerController allTimerController =
-      TimerController(timeString: timeString);
+class AllTimeRecipes {
+  TimerController allTimerController(index) {
+    return TimerController(timeString: secondsToTime(index));
+  }
 
-  AllTimer({required this.index});
-
-  List<String> get listTime {
+  List<String> listTime(index) {
     return myRecipes[index].stepTimeRecipes;
   }
 
-  String secondsToTime() {
-    int seconds = timeToSeconds();
+  String secondsToTime(index) {
+    int seconds = timeToSeconds(index);
     int min = seconds ~/ 60;
     int sec = seconds - min * 60;
     return '${min < 10 ? '0$min' : min}:${sec < 10 ? '0$sec' : sec}';
   }
 
-  int timeToSeconds() {
+  int timeToSeconds(index) {
     int initialValue = 0;
     int seconds = 0;
-    int allSeconds = listTime.fold<int>(initialValue, (previousValue, element) {
+    int allSeconds =
+        listTime(index).fold<int>(initialValue, (previousValue, element) {
       List timeList = element.split(':');
       seconds = seconds + int.parse(timeList[0]) * 60 + int.parse(timeList[1]);
-      print(seconds);
       return seconds;
     });
-    print(allSeconds);
     return allSeconds;
   }
 }
@@ -42,12 +39,10 @@ class AllTimer {
 
 class InfoRecipes extends StatefulWidget {
   final int index;
+  final TimerController allTimerController;
 
-  InfoRecipes({required this.index, super.key});
-
-  final String timeString = AllTimer(index: 0).secondsToTime();
-  final TimerController allTimerController =
-      TimerController(timeString: timeString);
+  InfoRecipes(this.index, {super.key})
+      : allTimerController = AllTimeRecipes().allTimerController(index);
 
   @override
   State<InfoRecipes> createState() => _InfoRecipesState();
@@ -82,12 +77,10 @@ class _InfoRecipesState extends State<InfoRecipes> {
       favoritesData.add(widget.index);
       color = Colors.red;
       setState(() {});
-      print(favoritesData);
     } else {
       favoritesData.remove(widget.index);
       color = Colors.grey;
       setState(() {});
-      print(favoritesData);
     }
   }
 
@@ -117,7 +110,8 @@ class _InfoRecipesState extends State<InfoRecipes> {
                       children: [
                         StreamBuilder(
                             stream: widget.allTimerController.timer,
-                            initialData: '4',
+                            initialData:
+                                AllTimeRecipes().secondsToTime(widget.index),
                             builder: ((context, snapshot) =>
                                 Text(snapshot.requireData))),
                         Row(
