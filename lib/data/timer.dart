@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:otus_food/data/data_recipes.dart';
+
 class TimerController {
   String timeString;
   StreamController<String> streamController = StreamController();
@@ -114,5 +116,34 @@ class _TimerWidgetState extends State<TimerWidget> {
             })),
       ]),
     ]);
+  }
+}
+
+class AllTimeRecipes {
+  TimerController allTimerController(OneRecipeIndex recipe) {
+    return TimerController(timeString: secondsToTime(recipe));
+  }
+/* 
+  List<String> listTime(index) {
+    return OneRecipeIndex(index: index).stepTextRecipes;
+  } */
+
+  String secondsToTime(OneRecipeIndex recipe) {
+    int seconds = timeToSeconds(recipe);
+    int min = seconds ~/ 60;
+    int sec = seconds - min * 60;
+    return '${min < 10 ? '0$min' : min}:${sec < 10 ? '0$sec' : sec}';
+  }
+
+  int timeToSeconds(OneRecipeIndex recipe) {
+    int initialValue = 0;
+    int seconds = 0;
+    int allSeconds = recipe.stepTimeRecipes.fold<int>(initialValue,
+        (previousValue, element) {
+      List timeList = element.split(':');
+      seconds = seconds + int.parse(timeList[0]) * 60 + int.parse(timeList[1]);
+      return seconds;
+    });
+    return allSeconds;
   }
 }

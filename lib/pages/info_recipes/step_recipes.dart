@@ -71,17 +71,11 @@ class ListStepData {
 
   List<StepData> get listStepData {
     List<StepData> list = [];
-    // проверяем колличество текстовых полей и полей времени
-    if (myRecipes[index].stepTextRecipes.length ==
-        myRecipes[index].stepTimeRecipes.length) {
-      for (int i = 0; i < myRecipes[index].stepTextRecipes.length; i++) {
-        list.add(StepData(
-            stepNum: i + 1,
-            stepText: myRecipes[index].stepTextRecipes[i],
-            stepTime: myRecipes[index].stepTimeRecipes[i]));
-      }
-    } else {
-      throw Exception('Колличество шагов текста и времени не совпадает');
+    for (int i = 0; i < myRecipes[index].stepTextRecipes.length; i++) {
+      list.add(StepData(
+          stepNum: i + 1,
+          stepText: myRecipes[index].stepTextRecipes[i],
+          stepTime: myRecipes[index].stepTimeRecipes[i]));
     }
     return list;
   }

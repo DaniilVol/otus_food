@@ -3,87 +3,20 @@ import 'package:otus_food/data/data_recipes.dart';
 import 'package:otus_food/data/timer.dart';
 import 'package:otus_food/pages/info_recipes/ingredient_list.dart';
 import 'package:otus_food/pages/info_recipes/step_recipes.dart';
-
-import '../favorites/favorites_data.dart';
-
-class AllTimeRecipes {
-  TimerController allTimerController(index) {
-    return TimerController(timeString: secondsToTime(index));
-  }
-
-  List<String> listTime(index) {
-    return myRecipes[index].stepTimeRecipes;
-  }
-
-  String secondsToTime(index) {
-    int seconds = timeToSeconds(index);
-    int min = seconds ~/ 60;
-    int sec = seconds - min * 60;
-    return '${min < 10 ? '0$min' : min}:${sec < 10 ? '0$sec' : sec}';
-  }
-
-  int timeToSeconds(index) {
-    int initialValue = 0;
-    int seconds = 0;
-    int allSeconds =
-        listTime(index).fold<int>(initialValue, (previousValue, element) {
-      List timeList = element.split(':');
-      seconds = seconds + int.parse(timeList[0]) * 60 + int.parse(timeList[1]);
-      return seconds;
-    });
-    return allSeconds;
-  }
-}
-
-// экран
+import 'package:otus_food/pages/favorites/favorites.dart';
 
 class InfoRecipes extends StatefulWidget {
-  final int index;
+  final OneRecipeIndex recipe;
   final TimerController allTimerController;
 
-  InfoRecipes(this.index, {super.key})
-      : allTimerController = AllTimeRecipes().allTimerController(index);
+  InfoRecipes({required this.recipe, super.key})
+      : allTimerController = AllTimeRecipes().allTimerController(recipe);
 
   @override
   State<InfoRecipes> createState() => _InfoRecipesState();
 }
 
 class _InfoRecipesState extends State<InfoRecipes> {
-  @override
-  void initState() {
-    favoriteState();
-    super.initState();
-  }
-
-  MaterialColor? color;
-  bool favoriteRecipe = false;
-
-  void favoriteState() {
-    for (int ithem in favoritesData) {
-      if (myRecipes[ithem] == myRecipes[widget.index]) {
-        color = Colors.red;
-        favoriteRecipe = true;
-        break;
-      } else {
-        color = Colors.grey;
-        favoriteRecipe = false;
-      }
-    }
-  }
-
-  void onTapFavorite() {
-    favoriteRecipe = !favoriteRecipe;
-    if (favoriteRecipe) {
-      favoritesData.add(widget.index);
-      color = Colors.red;
-      setState(() {});
-    } else {
-      favoritesData.remove(widget.index);
-      color = Colors.grey;
-      setState(() {});
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +44,7 @@ class _InfoRecipesState extends State<InfoRecipes> {
                         StreamBuilder(
                             stream: widget.allTimerController.timer,
                             initialData:
-                                AllTimeRecipes().secondsToTime(widget.index),
+                                AllTimeRecipes().secondsToTime(widget.recipe),
                             builder: ((context, snapshot) =>
                                 Text(snapshot.requireData))),
                         Row(
@@ -119,7 +52,7 @@ class _InfoRecipesState extends State<InfoRecipes> {
                           children: [
                             Expanded(
                                 child: Text(
-                              myRecipes[widget.index].nameRecipes,
+                              widget.recipe.nameRecipes,
                               style: const TextStyle(
                                   fontSize: 24, fontWeight: FontWeight.w500),
                             )),
@@ -135,7 +68,7 @@ class _InfoRecipesState extends State<InfoRecipes> {
                             const SizedBox(
                               width: 10,
                             ),
-                            Text(myRecipes[widget.index].timeRecipes,
+                            Text(widget.recipe.timeRecipes,
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
@@ -146,15 +79,7 @@ class _InfoRecipesState extends State<InfoRecipes> {
                       ],
                     )),
                     Column(
-                      children: [
-                        IconButton(
-                            onPressed: () => onTapFavorite(),
-                            icon: Icon(
-                              Icons.favorite,
-                              size: 40,
-                              color: color,
-                            ))
-                      ],
+                      children: [FavoriteHeart(recipe: widget.recipe)],
                     ),
                   ],
                 ),
@@ -166,7 +91,7 @@ class _InfoRecipesState extends State<InfoRecipes> {
                     Flexible(
                         fit: FlexFit.tight,
                         child: Image.asset(
-                          myRecipes[widget.index].imgRecipes,
+                          widget.recipe.imgRecipes,
                           height: 220,
                           fit: BoxFit.cover,
                         ))
@@ -183,6 +108,8 @@ class _InfoRecipesState extends State<InfoRecipes> {
                   ],
                 ),
                 const SizedBox(height: 20),
+
+                // вынести в стэйт бордер
                 Container(
                     decoration: BoxDecoration(
                       border: Border.all(width: 5, color: Colors.red),
@@ -191,10 +118,9 @@ class _InfoRecipesState extends State<InfoRecipes> {
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: IngredientListWidget(
-                          listNameIngredient:
-                              myRecipes[widget.index].ingredientName,
-                          listValueIngredient:
-                              myRecipes[widget.index].ingredientValue),
+                        listNameIngredient: widget.recipe.ingredientName,
+                        listValueIngredient: widget.recipe.ingredientValue,
+                      ),
                     )),
                 const SizedBox(height: 20),
                 const Row(
@@ -209,7 +135,7 @@ class _InfoRecipesState extends State<InfoRecipes> {
                 ),
                 Column(
                   children: ListStepData(
-                          index: widget
+                          index: widget.recipe
                               .index) // передаем индекс выбранного рецепта для создания списка виджетов шагов рецепта
                       .listStepData
                       .map((e) => StepWidget(

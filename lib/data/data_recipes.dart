@@ -1,3 +1,22 @@
+import 'package:flutter/material.dart';
+
+class OneRecipeIndex {
+  final int index;
+
+  OneRecipeIndex({required this.index});
+
+  String get imgRecipes => myRecipes[index].imgRecipes;
+  String get timeRecipes => myRecipes[index].timeRecipes;
+  String get nameRecipes => myRecipes[index].nameRecipes;
+  String get nameRecipesShort => (nameRecipes.length > 32)
+      ? '${nameRecipes.characters.take(32)}...'
+      : (nameRecipes);
+  List<String> get stepTextRecipes => myRecipes[index].stepTextRecipes;
+  List<String> get stepTimeRecipes => myRecipes[index].stepTimeRecipes;
+  List<String> get ingredientName => myRecipes[index].ingredientName;
+  List<String> get ingredientValue => myRecipes[index].ingredientValue;
+}
+
 List<Recipes> myRecipes = [
   Recipes(
       nameRecipes: 'Лосось в соусе терияки',
@@ -24,7 +43,8 @@ List<Recipes> myRecipes = [
   Recipes(
       nameRecipes: 'Поке боул с сыром тофу',
       timeRecipes: '30 минут',
-      imgRecipes: 'assets/img/poke.jpeg'),
+      imgRecipes: 'assets/img/poke.jpeg',
+      ingredientName: ['a', 'b']),
   Recipes(
       nameRecipes: 'Стейк из говядины по-грузински с картошкой',
       timeRecipes: '1 час 15 минут',
@@ -78,19 +98,6 @@ class Recipes {
       '15:00',
       '04:00',
     ],
-    this.ingredientName = const [
-      'Соевый соус',
-      'Вода',
-      'Мёд',
-      'Коричневый сахар',
-      'Чеснок',
-      'Тёртый свежий имбирь',
-      'Лимонный сок',
-      'Кукурузный крахмал',
-      'Растительное масло',
-      'Филе лосося или сёмги',
-      'Кунжут'
-    ],
     this.ingredientValue = const [
       '8 ст. ложек',
       '8 ст. ложек',
@@ -103,6 +110,19 @@ class Recipes {
       '1 ч. ложка',
       '680 г.',
       'по вкусу',
+    ],
+    this.ingredientName = const [
+      'Соевый соус',
+      'Вода',
+      'Мёд',
+      'Коричневый сахар',
+      'Чеснок',
+      'Тёртый свежий имбирь',
+      'Лимонный сок',
+      'Кукурузный крахмал',
+      'Растительное масло',
+      'Филе лосося или сёмги',
+      'Кунжут'
     ],
   });
 
