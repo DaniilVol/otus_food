@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/data/data_recipes.dart';
 import 'package:otus_food/data/timer.dart';
+import 'package:otus_food/pages/info_recipes/comments.dart';
 import 'package:otus_food/pages/info_recipes/ingredient_list.dart';
 import 'package:otus_food/pages/info_recipes/step_recipes.dart';
 import 'package:otus_food/pages/favorites/favorites.dart';
@@ -163,6 +164,9 @@ class _InfoRecipesState extends State<InfoRecipes> {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                 ),
+                CommentsWidget(
+                    commentData:
+                        CommentData(text: 'Начать готовитьНачать готовить')),
               ],
             ))
       ]),
