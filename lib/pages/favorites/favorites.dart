@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/data/data_recipes.dart';
+import 'package:otus_food/pages/info_recipes/comments.dart';
 import 'package:otus_food/pages/list_recipes/list_recipes.dart';
 
 // разобраться с глобальной

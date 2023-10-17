@@ -165,8 +165,10 @@ class _InfoRecipesState extends State<InfoRecipes> {
                   ),
                 ),
                 CommentsWidget(
-                    commentData:
-                        CommentData(text: 'Начать готовитьНачать готовить')),
+                        commentData: CommentData(
+                            text:
+                                'Начать готовить Начать готовить Начать готовить Начать готовить Начать готовить Начать готовить')),
+                
               ],
             ))
       ]),
