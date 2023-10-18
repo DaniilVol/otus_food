@@ -1,74 +1,136 @@
 import 'package:flutter/material.dart';
 
-class CommentData {
-  final String login = 'User';
-  final String data = DateTime.now().toString();
-  final String photo = 'assets/img/burger.jpg';
-  final String text;
-
-  CommentData({required this.text});
-}
-
-class CommentsWidget extends StatefulWidget {
-  final CommentData commentData;
-  const CommentsWidget({super.key, required this.commentData});
+class PushComment extends StatefulWidget {
+  const PushComment({super.key});
 
   @override
-  State<CommentsWidget> createState() => _CommentsWidgetState();
+  State<PushComment> createState() => _PushCommentState();
 }
 
-class _CommentsWidgetState extends State<CommentsWidget> {
+class _PushCommentState extends State<PushComment> {
+  final controllerComment = TextEditingController();
+  final List<CommentWidget> listComments = [];
+
+  @override
+  void dispose() {
+    controllerComment.dispose();
+    super.dispose();
+  }
+
+  void onTap() {
+    listComments.add(
+      CommentWidget(
+          commentData: CommentData(commentText: controllerComment.text)),
+    );
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-        elevation: 0,
-        child: Row(
-          children: [
-            Column(
-              children: [
-                Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    height: 70,
-                    width: 70,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(40)),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(35),
-                      child: Image.asset(
-                        widget.commentData.photo,
-                        fit: BoxFit.cover,
-                      ),
-                    ))
-              ],
-            ),
-            Column(
-              children: [
-                //   Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       children: [
-                //         Text(
-                //           widget.commentData.login,
-                //           style: const TextStyle(color: Colors.green),
-                //         ),
-                //         Text(
-                //           widget.commentData.data,
-                //           style: const TextStyle(color: Colors.grey),
-                //         )
-                //       ],
-                //     ),
+    return Column(
+      children: [
+        Column(
+          children: List.generate(
+              listComments.length, (index) => listComments[index]),
+        ),
+        TextField(
+          controller: controllerComment,
+        ),
+        ElevatedButton(
+            onPressed: onTap,
+            style: ButtonStyle(
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30))),
+                minimumSize: MaterialStateProperty.all(const Size(300, 50)),
+                backgroundColor: MaterialStateProperty.all(
+                    const Color.fromARGB(255, 2, 56, 4)),
+                elevation: MaterialStateProperty.all(0),
+                splashFactory: NoSplash.splashFactory),
+            child: const Text(
+              'Отправить',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            ))
+      ],
+    );
+  }
+}
 
-                Row(children: [Text(widget.commentData.text)]),
-                //   Row(
-                //     children: [
-                //       SizedBox(
-                //           height: 70,
-                //           width: 100,
-                //           child: Image.asset(widget.commentData.photo))
-                //     ],
-                //   )
-              ],
-            )
-          ],
-        ));
+class CommentData {
+  final String login = 'User';
+  final String commentDate =
+      "${DateTime.now().day}.${DateTime.now().month}.${DateTime.now().year}";
+  final String commentPhoto = 'assets/img/burger.jpg';
+  final String commentText;
+
+  CommentData({required this.commentText});
+}
+
+class CommentWidget extends StatelessWidget {
+  final CommentData commentData;
+
+  const CommentWidget({
+    super.key,
+    required this.commentData,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 70.0,
+          height: 70.0,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: NetworkImage(commentData.commentPhoto),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        const SizedBox(width: 10.0),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    commentData.login,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(commentData.commentDate),
+                ],
+              ),
+              const SizedBox(height: 5.0),
+
+              Text(commentData.commentText),
+
+              const SizedBox(height: 10.0),
+              // AspectRatio(
+              //   aspectRatio: 16 / 9, // Пропорции изображения (ширина и высота)
+              //   child: Image.network(
+              //     commentData.commentPhoto,
+              //     fit: BoxFit
+              //         .contain,
+              //   ),
+              // ),
+              Container(
+                width: double.infinity,
+                height: 100.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(commentData.commentPhoto),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }

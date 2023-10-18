@@ -164,11 +164,10 @@ class _InfoRecipesState extends State<InfoRecipes> {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                 ),
-                CommentsWidget(
-                        commentData: CommentData(
-                            text:
-                                'Начать готовить Начать готовить Начать готовить Начать готовить Начать готовить Начать готовить')),
-                
+                const SizedBox(
+                  height: 40,
+                ),
+                const PushComment(),
               ],
             ))
       ]),
