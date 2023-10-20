@@ -18,11 +18,14 @@ class _PushCommentState extends State<PushComment> {
   }
 
   void onTap() {
-    listComments.add(
-      CommentWidget(
-          commentData: CommentData(commentText: controllerComment.text)),
-    );
-    setState(() {});
+    if (controllerComment.text.isNotEmpty) {
+      listComments.add(
+        CommentWidget(
+            commentData: CommentData(commentText: controllerComment.text)),
+      );
+      controllerComment.text = '';
+      setState(() {});
+    }
   }
 
   @override
@@ -33,8 +36,29 @@ class _PushCommentState extends State<PushComment> {
           children: List.generate(
               listComments.length, (index) => listComments[index]),
         ),
-        TextField(
-          controller: controllerComment,
+        Padding(
+          padding: const EdgeInsets.all(5),
+          child: TextField(
+            onEditingComplete: onTap,
+            controller: controllerComment,
+            maxLines: 3,
+            decoration: InputDecoration(
+                hintText: 'оставить комментарий',
+                fillColor: Colors.white,
+                filled: true,
+                focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color.fromARGB(255, 12, 86, 14), width: 2),
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                border: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: Colors.grey,
+                    ),
+                    borderRadius: BorderRadius.circular(5))),
+          ),
+        ),
+        const SizedBox(
+          height: 20,
         ),
         ElevatedButton(
             onPressed: onTap,
@@ -89,7 +113,7 @@ class CommentWidget extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 10.0),
+        const SizedBox(width: 20.0),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,16 +123,24 @@ class CommentWidget extends StatelessWidget {
                 children: [
                   Text(
                     commentData.login,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.green),
                   ),
-                  Text(commentData.commentDate),
+                  Text(
+                    commentData.commentDate,
+                    style: const TextStyle(color: Colors.grey),
+                  ),
                 ],
               ),
-              const SizedBox(height: 5.0),
+              const SizedBox(height: 15.0),
 
-              Text(commentData.commentText),
+              Text(
+                commentData.commentText,
+                style:
+                    const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              ),
 
-              const SizedBox(height: 10.0),
+              const SizedBox(height: 15.0),
               // AspectRatio(
               //   aspectRatio: 16 / 9, // Пропорции изображения (ширина и высота)
               //   child: Image.network(
@@ -119,7 +151,7 @@ class CommentWidget extends StatelessWidget {
               // ),
               Container(
                 width: double.infinity,
-                height: 100.0,
+                height: 200.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(commentData.commentPhoto),

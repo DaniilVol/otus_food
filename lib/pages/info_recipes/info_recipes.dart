@@ -113,7 +113,7 @@ class _InfoRecipesState extends State<InfoRecipes> {
                 // вынести в стэйт бордер
                 Container(
                     decoration: BoxDecoration(
-                      border: Border.all(width: 5, color: Colors.red),
+                      border: Border.all(width: 2, color: Colors.grey),
                       borderRadius: const BorderRadius.all(Radius.circular(5)),
                     ),
                     child: Padding(
@@ -123,6 +123,27 @@ class _InfoRecipesState extends State<InfoRecipes> {
                         listValueIngredient: widget.recipe.ingredientValue,
                       ),
                     )),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          side: const BorderSide(color: Colors.green, width: 2),
+                          borderRadius: BorderRadius.circular(30))),
+                      minimumSize:
+                          MaterialStateProperty.all(const Size(300, 50)),
+                      backgroundColor: MaterialStateProperty.all(
+                          const Color.fromARGB(255, 255, 255, 255)),
+                      elevation: MaterialStateProperty.all(0),
+                      splashFactory: NoSplash.splashFactory),
+                  child: const Text(
+                    'Проверить наличие',
+                    style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
                 const SizedBox(height: 20),
                 const Row(
                   children: [

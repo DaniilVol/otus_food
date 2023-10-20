@@ -26,7 +26,7 @@ List<Recipes> myRecipes = [
         '06:00',
         '07:00',
         '06:00',
-        '00:09',
+        '01:00',
         '06:00',
         '15:00',
         '04:00'
@@ -41,14 +41,36 @@ List<Recipes> myRecipes = [
         'Перед подачей полейте соусом из формы и посыпьте кунжутом.',
       ]),
   Recipes(
-      nameRecipes: 'Поке боул с сыром тофу',
-      timeRecipes: '30 минут',
-      imgRecipes: 'assets/img/poke.jpeg',
-      ingredientName: ['a', 'b']),
+    nameRecipes: 'Поке боул с сыром тофу',
+    timeRecipes: '30 минут',
+    imgRecipes: 'assets/img/poke.jpeg',
+    ingredientName: [
+      'Соевый соус',
+      'Вода',
+      'Мёд',
+      'Коричневый сахар',
+      'Чеснок',
+    ],
+    ingredientValue: [
+      '8 ст. ложек',
+      '8 ст. ложек',
+      '3 ст. ложки',
+      '2 ст. ложки',
+    ],
+  ),
   Recipes(
-      nameRecipes: 'Стейк из говядины по-грузински с картошкой',
-      timeRecipes: '1 час 15 минут',
-      imgRecipes: 'assets/img/steak.jpg'),
+    nameRecipes: 'Стейк из говядины по-грузински с картошкой',
+    timeRecipes: '1 час 15 минут',
+    imgRecipes: 'assets/img/steak.jpg',
+    ingredientName: [
+      'Соевый соус',
+      'Вода',
+    ],
+    ingredientValue: [
+      '8 ст. ложек',
+      '8 ст. ложек',
+    ],
+  ),
   Recipes(
       nameRecipes: 'Тосты с голубикой и бананом',
       timeRecipes: '45 минут',
