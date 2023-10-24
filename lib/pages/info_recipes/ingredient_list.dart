@@ -10,6 +10,19 @@ class IngredientList {
   IngredientList(this._name, this._value);
 }
 
+// class IngredientList {
+//   final List<String> _name;
+//   final List<String> _value;
+
+//   List<Text> get name => _name.map((e) => Text('\u2022 $e', style: const TextStyle(
+//   fontSize: 14, fontWeight: FontWeight.w500))).toList();
+//   List<Text> get value => _value.map((e, style: const TextStyle(
+//       fontSize: 13, fontWeight: FontWeight.w400),
+// ) => Text(e)).toList();
+
+//   IngredientList(this._name, this._value);
+// }
+
 class IngredientListWidget extends StatelessWidget {
   final List<String> listNameIngredient;
   final List<String> listValueIngredient;
