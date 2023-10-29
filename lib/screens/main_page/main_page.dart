@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food/pages/favorites/favorites.dart';
-import 'package:otus_food/pages/list_recipes/list_recipes.dart';
-import 'package:otus_food/pages/auth/auth.dart';
-import 'package:otus_food/pages/refrigerator/refrigerator.dart';
+import 'package:otus_food/screens/favorites/favorites.dart';
+import 'package:otus_food/screens/list_recipes/list_recipes.dart';
+import 'package:otus_food/screens/auth/auth.dart';
+import 'package:otus_food/screens/refrigerator/refrigerator.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

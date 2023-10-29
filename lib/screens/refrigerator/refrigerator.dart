@@ -1,61 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/data/data_recipes.dart';
-import 'package:otus_food/pages/info_recipes/ingredient_list.dart';
-import 'package:otus_food/pages/list_recipes/list_recipes.dart';
+import 'package:otus_food/providers/ingredient_refrigerator_provider.dart';
+import 'package:otus_food/widgets/ingredient_list_widget.dart';
+import 'package:otus_food/widgets/one_recipes_widget.dart';
 import 'package:provider/provider.dart';
-
-class IngredientRefrigerator extends ChangeNotifier {
-  final List<String> ingredientName;
-  final List<String> ingredientValue;
-  List<int> listRecomendedRecipesIndex = [];
-
-  IngredientRefrigerator(
-      {this.ingredientName = const [
-        'Соевый соус',
-        'Вода',
-        'Мёд',
-        'Коричневый сахар',
-        'Чеснок',
-      ],
-      this.ingredientValue = const [
-        '8 ст. ложек',
-        '8 ст. ложек',
-        '3 ст. ложки',
-        '2 ст. ложки',
-      ]});
-
-  void findRecipes() {
-    listRecomendedRecipesIndex.clear();
-
-    for (int i = 0; i < myRecipes.length; i++) {
-      List<String> ingredients = myRecipes[i].ingredientName;
-
-      bool containsAll = true;
-      for (int j = 0; j < ingredients.length; j++) {
-        if (!ingredientName.contains(ingredients[j])) {
-          containsAll = false;
-          break;
-        }
-      }
-
-      if (containsAll) {
-        listRecomendedRecipesIndex.add(i);
-        notifyListeners();
-      }
-    }
-  }
-
-  void checkIngredient(List<String> ingredient) {
-    for (int i = 0; i < ingredient.length; i++) {
-      if (!ingredientName.contains(ingredient[i])) {
-        //containsAll = false;
-        break;
-      }
-    }
-  }
-}
-
-// экран
 
 class Refrigerator extends StatelessWidget {
   const Refrigerator({super.key});
@@ -86,12 +34,10 @@ class Refrigerator extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: IngredientListWidget(
-                          listNameIngredient: context
-                              .watch<IngredientRefrigerator>()
-                              .ingredientName,
-                          listValueIngredient: context
-                              .watch<IngredientRefrigerator>()
-                              .ingredientValue,
+                          listNameIngredient:
+                              context.watch<IngredientRefrigerator>().name,
+                          listValueIngredient:
+                              context.watch<IngredientRefrigerator>().value,
                         ),
                       ),
                     ],

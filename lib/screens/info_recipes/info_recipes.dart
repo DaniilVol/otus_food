@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/data/data_recipes.dart';
 import 'package:otus_food/data/timer.dart';
-import 'package:otus_food/pages/info_recipes/comments.dart';
-import 'package:otus_food/pages/info_recipes/ingredient_list.dart';
-import 'package:otus_food/pages/info_recipes/step_recipes.dart';
-import 'package:otus_food/pages/favorites/favorites.dart';
+import 'package:otus_food/models/ingredient_list_model.dart';
+import 'package:otus_food/models/step_data_model.dart';
+import 'package:otus_food/widgets/favorite_heart_widget.dart';
+import 'package:otus_food/screens/info_recipes/comments.dart';
+import 'package:otus_food/widgets/ingredient_list_widget.dart';
+import 'package:otus_food/widgets/step_recipes_widget.dart';
+import 'package:provider/provider.dart';
 
 class InfoRecipes extends StatefulWidget {
   final OneRecipeIndex recipe;
@@ -109,39 +112,12 @@ class _InfoRecipesState extends State<InfoRecipes> {
                   ],
                 ),
                 const SizedBox(height: 20),
-
-                // вынести в стэйт бордер
-                Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Colors.grey),
-                      borderRadius: const BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: IngredientListWidget(
-                        listNameIngredient: widget.recipe.ingredientName,
-                        listValueIngredient: widget.recipe.ingredientValue,
-                      ),
-                    )),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          side: const BorderSide(color: Colors.green, width: 2),
-                          borderRadius: BorderRadius.circular(30))),
-                      minimumSize:
-                          MaterialStateProperty.all(const Size(300, 50)),
-                      backgroundColor: MaterialStateProperty.all(
-                          const Color.fromARGB(255, 255, 255, 255)),
-                      elevation: MaterialStateProperty.all(0),
-                      splashFactory: NoSplash.splashFactory),
-                  child: const Text(
-                    'Проверить наличие',
-                    style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500),
+                ChangeNotifierProvider(
+                  create: (context) => IngredientListProvider(
+                      widget.recipe.ingredientName,
+                      widget.recipe.ingredientValue),
+                  child: IngredientsRecipeInfo(
+                    recipe: widget.recipe,
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -192,6 +168,55 @@ class _InfoRecipesState extends State<InfoRecipes> {
               ],
             ))
       ]),
+    );
+  }
+}
+
+class IngredientsRecipeInfo extends StatelessWidget {
+  final OneRecipeIndex recipe;
+  const IngredientsRecipeInfo({required this.recipe, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                  width: 2,
+                  color: context.watch<IngredientListProvider>().borderColor),
+              borderRadius: const BorderRadius.all(Radius.circular(5)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: IngredientListWidget(
+                listNameIngredient:
+                    context.watch<IngredientListProvider>().name,
+                listValueIngredient:
+                    context.watch<IngredientListProvider>().value,
+              ),
+            )),
+        const SizedBox(height: 20),
+        ElevatedButton(
+          onPressed: () =>
+              context.read<IngredientListProvider>().checkInredient(),
+          //() {},
+          style: ButtonStyle(
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  side: const BorderSide(color: Colors.green, width: 2),
+                  borderRadius: BorderRadius.circular(30))),
+              minimumSize: MaterialStateProperty.all(const Size(300, 50)),
+              backgroundColor: MaterialStateProperty.all(
+                  const Color.fromARGB(255, 255, 255, 255)),
+              elevation: MaterialStateProperty.all(0),
+              splashFactory: NoSplash.splashFactory),
+          child: const Text(
+            'Проверить наличие',
+            style: TextStyle(
+                color: Colors.green, fontSize: 16, fontWeight: FontWeight.w500),
+          ),
+        ),
+      ],
     );
   }
 }

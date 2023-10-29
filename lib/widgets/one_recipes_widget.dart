@@ -1,29 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:flutter/material.dart';
-
 import 'package:otus_food/data/data_recipes.dart';
-
-import '../info_recipes/info_recipes.dart';
-
-class ListRecipesWidget extends StatelessWidget {
-  const ListRecipesWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-          itemCount: myRecipes.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-              child: OneRecipesWidget(
-                recipe: OneRecipeIndex(index: index),
-              ),
-            );
-          }),
-    );
-  }
-}
+import 'package:otus_food/screens/info_recipes/info_recipes.dart';
 
 class OneRecipesWidget extends StatelessWidget {
   final OneRecipeIndex recipe;

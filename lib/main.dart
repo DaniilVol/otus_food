@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food/pages/auth/auth.dart';
-import 'package:otus_food/pages/auth/auth_reg.dart';
-import 'package:otus_food/pages/main/main_page.dart';
-import 'package:otus_food/pages/refrigerator/refrigerator.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:otus_food/providers/ingredient_refrigerator_provider.dart';
+import 'package:otus_food/screens/auth/auth.dart';
+import 'package:otus_food/screens/auth/auth_reg.dart';
+import 'package:otus_food/screens/main_page/main_page.dart';
 import 'package:provider/provider.dart';
+import 'utils/init_hive.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  // var ingredientRefrigeratorHive =
+  // await Hive.openBox<List<String>>('ingredientRefrigerator');
+  // ingredientRefrigeratorHive.deleteFromDisk;
+  // hive();
   runApp(const MyApp());
 }
 

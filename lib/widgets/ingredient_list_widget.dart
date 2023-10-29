@@ -1,14 +1,5 @@
 import 'package:flutter/material.dart';
-
-class IngredientList {
-  final List<String> _name;
-  final List<String> _value;
-
-  List<String> get name => _name.map((e) => '\u2022 $e').toList();
-  List<String> get value => _value.map((e) => e).toList();
-
-  IngredientList(this._name, this._value);
-}
+import 'package:otus_food/models/ingredient_list_model.dart';
 
 // class IngredientList {
 //   final List<String> _name;
@@ -24,8 +15,8 @@ class IngredientList {
 // }
 
 class IngredientListWidget extends StatelessWidget {
-  final List<String> listNameIngredient;
-  final List<String> listValueIngredient;
+  final List<Text> listNameIngredient;
+  final List<Text> listValueIngredient;
   const IngredientListWidget({
     required this.listNameIngredient,
     required this.listValueIngredient,
@@ -40,15 +31,15 @@ class IngredientListWidget extends StatelessWidget {
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: IngredientList(listNameIngredient, listValueIngredient)
-                .name
+            children: listNameIngredient
                 .map((text) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Text(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: text
+                    /* Text(
                         text,
                         style: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w500),
-                      ),
+                      ), */
                     ))
                 .toList(),
           ),
@@ -56,15 +47,15 @@ class IngredientListWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: IngredientList(listNameIngredient, listValueIngredient)
-                .value
+            children: listValueIngredient
                 .map((text) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Text(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: text
+                    /* Text(
                         text,
                         style: const TextStyle(
                             fontSize: 13, fontWeight: FontWeight.w400),
-                      ),
+                      ), */
                     ))
                 .toList(),
           ),

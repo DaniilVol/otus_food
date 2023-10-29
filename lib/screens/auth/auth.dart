@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food/pages/auth/auth_in.dart';
-import 'package:otus_food/pages/auth/auth_reg.dart';
+import 'package:otus_food/screens/auth/auth_in.dart';
+import 'package:otus_food/screens/auth/auth_reg.dart';
 
 class AuthWidget extends StatefulWidget {
   const AuthWidget({super.key});
