@@ -1,5 +1,7 @@
 import 'package:otus_food/data/data_recipes.dart';
 
+// один шаг приготавления
+
 class StepData {
   final int stepNum;
   final String stepText;
@@ -8,6 +10,8 @@ class StepData {
   StepData(
       {required this.stepNum, required this.stepText, required this.stepTime});
 }
+
+// список шагов приготовления рецепта по индексу
 
 class ListStepData {
   int index;

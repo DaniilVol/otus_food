@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/data/data_recipes.dart';
 import 'package:otus_food/providers/ingredient_refrigerator_provider.dart';
+import 'package:otus_food/widgets/button_dark_green.dart';
 import 'package:otus_food/widgets/ingredient_list_widget.dart';
 import 'package:otus_food/widgets/one_recipes_widget.dart';
 import 'package:provider/provider.dart';
+
+// экран холодильник
 
 class Refrigerator extends StatelessWidget {
   const Refrigerator({super.key});
@@ -46,20 +49,11 @@ class Refrigerator extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-              onPressed: context.read<IngredientRefrigerator>().findRecipes,
-              style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30))),
-                  minimumSize: MaterialStateProperty.all(const Size(300, 50)),
-                  backgroundColor: MaterialStateProperty.all(
-                      const Color.fromARGB(255, 2, 56, 4)),
-                  elevation: MaterialStateProperty.all(0),
-                  splashFactory: NoSplash.splashFactory),
-              child: const Text(
-                'Рекомендовать рецепты',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
+            ButtonDarkGreen(
+                onPressed: context.read<IngredientRefrigerator>().findRecipes,
+                text: 'Рекомендовать рецепты'),
+            const SizedBox(
+              height: 20,
             ),
             const SizedBox(
               height: 20,

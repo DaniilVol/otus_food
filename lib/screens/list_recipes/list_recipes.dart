@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:otus_food/data/data_recipes.dart';
 import 'package:otus_food/widgets/one_recipes_widget.dart';
 
+// экран список рецептов
+
 class ListRecipesWidget extends StatelessWidget {
   const ListRecipesWidget({super.key});
 

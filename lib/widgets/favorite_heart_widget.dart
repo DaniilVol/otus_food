@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/data/data_recipes.dart';
-import 'package:otus_food/screens/favorites/favorites.dart';
+import 'package:otus_food/providers/favorit_data_provider.dart';
+import 'package:provider/provider.dart';
+
+// виджет сердечко - избранное
 
 class FavoriteHeart extends StatefulWidget {
   final OneRecipeIndex recipe;
@@ -22,7 +25,7 @@ class _FavoriteHeartState extends State<FavoriteHeart> {
   bool favoriteRecipe = false;
 
   void favoriteState() {
-    for (int ithem in favoritesData) {
+    for (int ithem in context.read<FavoriteData>().favoritesData) {
       if (OneRecipeIndex(index: ithem).nameRecipes ==
           widget.recipe.nameRecipes) {
         color = Colors.red;
@@ -38,10 +41,10 @@ class _FavoriteHeartState extends State<FavoriteHeart> {
   void onTapFavorite() {
     favoriteRecipe = !favoriteRecipe;
     if (favoriteRecipe) {
-      favoritesData.add(widget.recipe.index);
+      context.read<FavoriteData>().add(widget.recipe.index);
       color = Colors.red;
     } else {
-      favoritesData.remove(widget.recipe.index);
+      context.read<FavoriteData>().remove(widget.recipe.index);
       color = Colors.grey;
     }
     setState(() {});
@@ -51,6 +54,7 @@ class _FavoriteHeartState extends State<FavoriteHeart> {
   Widget build(BuildContext context) {
     return IconButton(
         onPressed: () => onTapFavorite(),
+        splashRadius: 1,
         icon: Icon(
           Icons.favorite,
           size: 40,

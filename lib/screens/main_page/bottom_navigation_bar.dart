@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food/const/color_list.dart';
+import 'package:otus_food/providers/favorit_data_provider.dart';
 import 'package:otus_food/screens/favorites/favorites.dart';
 import 'package:otus_food/screens/list_recipes/list_recipes.dart';
 import 'package:otus_food/screens/auth/auth.dart';
 import 'package:otus_food/screens/refrigerator/refrigerator.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+// экран начальная страница
+
+class BottomNavigationBarWidget extends StatefulWidget {
+  const BottomNavigationBarWidget({super.key});
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<BottomNavigationBarWidget> createState() =>
+      _BottomNavigationBarWidgetState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   final List _pages = [
     const ListRecipesWidget(),
     const Refrigerator(),
@@ -34,11 +39,13 @@ class _MainPageState extends State<MainPage> {
           currentIndex: _currentIndex,
           showUnselectedLabels: true,
           onTap: onTap,
-          selectedItemColor: const Color(0xff2ECC71),
-          unselectedItemColor: Colors.grey[600],
+          selectedItemColor: ColorList.main.color,
+          unselectedItemColor: ColorList.gray.color,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.local_pizza),
+              icon: ImageIcon(
+                AssetImage('assets/icons/pizza.png'),
+              ),
               label: 'Рецепты',
             ),
             BottomNavigationBarItem(
@@ -50,7 +57,9 @@ class _MainPageState extends State<MainPage> {
               label: 'Избранное',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_rounded),
+              icon: ImageIcon(
+                AssetImage('assets/icons/user.png'),
+              ),
               label: 'Вход',
             ),
           ],

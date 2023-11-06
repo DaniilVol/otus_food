@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:otus_food/data/data_recipes.dart';
+
+// таймер
 
 class TimerController {
   String timeString;
@@ -22,8 +23,6 @@ class TimerController {
           (event) => streamController.sink.add(event),
           onDone: () => onDoneStreamController = true,
         );
-    // print(streamController.isClosed);
-    //print(streamController.done);
   }
 
   void pause() {
@@ -52,7 +51,7 @@ class TimerController {
     return '${min < 10 ? '0$min' : min}:${sec < 10 ? '0$sec' : sec}';
   }
 
-  int timeToSeconds(timeString) {
+  int timeToSeconds(String timeString) {
     List timeList = timeString.split(':');
     int minutes = int.parse(timeList[0]);
     int seconds = int.parse(timeList[1]);
@@ -91,13 +90,18 @@ class _TimerWidgetState extends State<TimerWidget> {
         Checkbox(
             value: isChecked,
             onChanged: (value) {
-              if (widget.timerController.onDoneStreamController == false) {
-                isChecked = value!;
-                widget.timerController.onChanged(isChecked);
-                widget.allTimerController.onChanged(isChecked);
-                setState(() {});
-              } else {
-                isChecked = true;
+              // если таймер включен или чекбокс включен, нельзя включить несколько одновременно
+              if (widget.allTimerController.subscription?.isPaused != false ||
+                  value == false) {
+                // если таймер активен то управляем им
+                if (widget.timerController.onDoneStreamController == false) {
+                  isChecked = value!;
+                  widget.timerController.onChanged(isChecked);
+                  widget.allTimerController.onChanged(isChecked);
+                  setState(() {});
+                } else {
+                  isChecked = true;
+                }
               }
             }),
       ]),
@@ -123,10 +127,6 @@ class AllTimeRecipes {
   TimerController allTimerController(OneRecipeIndex recipe) {
     return TimerController(timeString: secondsToTime(recipe));
   }
-/* 
-  List<String> listTime(index) {
-    return OneRecipeIndex(index: index).stepTextRecipes;
-  } */
 
   String secondsToTime(OneRecipeIndex recipe) {
     int seconds = timeToSeconds(recipe);

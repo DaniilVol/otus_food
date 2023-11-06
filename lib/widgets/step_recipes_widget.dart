@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:otus_food/data/timer.dart';
 import 'package:otus_food/models/step_data_model.dart';
 
-// виджет отрисовки одного шага приготовления
+// виджет одного шага приготовления
 
 class StepWidget extends StatefulWidget {
   final TimerController allTimerController;

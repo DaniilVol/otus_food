@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:otus_food/const/style.dart';
 import 'package:otus_food/data/data_recipes.dart';
+
+// ингредиенты в холодильнике
 
 class IngredientRefrigerator extends ChangeNotifier {
   List<String> ingredientName = [];
   List<String> ingredientValue = [];
   List<Text> get name => ingredientName
-      .map((e) => Text('\u2022 $e',
-          style: const TextStyle(
-              color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500)))
+      .map((e) => Text('\u2022 $e', style: Style.ingredientName.textStyle))
       .toList();
   List<Text> get value => ingredientValue
-      .map((e) => Text(e,
-          style: const TextStyle(
-              color: Colors.black, fontSize: 13, fontWeight: FontWeight.w400)))
+      .map((e) => Text(e, style: Style.ingredientValue.textStyle))
       .toList();
 
   List<int> listRecomendedRecipesIndex = [];
@@ -23,21 +22,6 @@ class IngredientRefrigerator extends ChangeNotifier {
 
   Future<void> _init() async {
     var box = await Hive.openBox<List<String>>('ingredientRefrigerator');
-
-    // await box.put('ingredientName', [
-    //   'Соевый соус',
-    //   'Вода',
-    //   'Мёд',
-    //   'Коричневый сахар',
-    //   'Чеснок',
-    // ]);
-
-    // await box.put('ingredientValue', [
-    //   '8 ст. ложек',
-    //   '8 ст. ложек',
-    //   '3 ст. ложки',
-    //   '2 ст. ложки',
-    // ]);
 
     ingredientName = box.get('ingredientName', defaultValue: [])!;
     ingredientValue = box.get('ingredientValue', defaultValue: [])!;
@@ -62,15 +46,6 @@ class IngredientRefrigerator extends ChangeNotifier {
       if (containsAll) {
         listRecomendedRecipesIndex.add(i);
         notifyListeners();
-      }
-    }
-  }
-
-  void checkIngredient(List<String> ingredient) {
-    for (int i = 0; i < ingredient.length; i++) {
-      if (!ingredientName.contains(ingredient[i])) {
-        //containsAll = false;
-        break;
       }
     }
   }

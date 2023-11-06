@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/models/comment_data_model.dart';
+import 'package:otus_food/widgets/button_dark_green.dart';
 import 'package:otus_food/widgets/comment_widget.dart';
+
+// экран комментарий
 
 class PushComment extends StatefulWidget {
   const PushComment({super.key});
@@ -62,20 +65,7 @@ class _PushCommentState extends State<PushComment> {
         const SizedBox(
           height: 20,
         ),
-        ElevatedButton(
-            onPressed: onTap,
-            style: ButtonStyle(
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30))),
-                minimumSize: MaterialStateProperty.all(const Size(300, 50)),
-                backgroundColor: MaterialStateProperty.all(
-                    const Color.fromARGB(255, 2, 56, 4)),
-                elevation: MaterialStateProperty.all(0),
-                splashFactory: NoSplash.splashFactory),
-            child: const Text(
-              'Отправить',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ))
+        ButtonDarkGreen(onPressed: onTap, text: 'Отправить')
       ],
     );
   }

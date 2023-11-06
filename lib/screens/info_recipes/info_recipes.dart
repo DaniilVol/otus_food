@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food/const/style.dart';
 import 'package:otus_food/data/data_recipes.dart';
 import 'package:otus_food/data/timer.dart';
 import 'package:otus_food/models/ingredient_list_model.dart';
-import 'package:otus_food/models/step_data_model.dart';
+import 'package:otus_food/screens/info_recipes/ingredients_recipe_info.dart';
+import 'package:otus_food/screens/info_recipes/step_recipes_info.dart';
 import 'package:otus_food/widgets/favorite_heart_widget.dart';
 import 'package:otus_food/screens/info_recipes/comments.dart';
-import 'package:otus_food/widgets/ingredient_list_widget.dart';
-import 'package:otus_food/widgets/step_recipes_widget.dart';
 import 'package:provider/provider.dart';
+
+// экран информация о рецепте
 
 class InfoRecipes extends StatefulWidget {
   final OneRecipeIndex recipe;
@@ -26,6 +28,16 @@ class _InfoRecipesState extends State<InfoRecipes> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              color: Colors.black,
+              icon: const ImageIcon(AssetImage('assets/icons/megafon.png')),
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            ),
+          ),
+        ],
         toolbarHeight: 60,
         title: const Text('Рецепт'),
         centerTitle: true,
@@ -104,11 +116,9 @@ class _InfoRecipesState extends State<InfoRecipes> {
                 const SizedBox(
                   height: 22.5,
                 ),
-                const Row(
+                Row(
                   children: [
-                    Text('Ингридиенты',
-                        style:
-                            TextStyle(fontSize: 16, color: Color(0xff165932))),
+                    Text('Ингридиенты', style: Style.labelInfo.textStyle)
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -121,102 +131,23 @@ class _InfoRecipesState extends State<InfoRecipes> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Row(
+                Row(
                   children: [
                     Text('Шаги приготовления',
-                        style:
-                            TextStyle(fontSize: 16, color: Color(0xff165932))),
+                        style: Style.labelInfo.textStyle),
                   ],
                 ),
+                const SizedBox(height: 20),
+                StepRecipesInfo(
+                    recipe: widget.recipe,
+                    allTimerController: widget.allTimerController),
                 const SizedBox(
                   height: 20,
-                ),
-                Column(
-                  children: ListStepData(
-                          index: widget.recipe
-                              .index) // передаем индекс выбранного рецепта для создания списка виджетов шагов рецепта
-                      .listStepData
-                      .map((e) => StepWidget(
-                            stepData: e,
-                            allTimerController: widget.allTimerController,
-                          ))
-                      .toList(),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30))),
-                      minimumSize:
-                          MaterialStateProperty.all(const Size(300, 50)),
-                      backgroundColor: MaterialStateProperty.all(
-                          const Color.fromARGB(255, 2, 56, 4)),
-                      elevation: MaterialStateProperty.all(0),
-                      splashFactory: NoSplash.splashFactory),
-                  child: const Text(
-                    'Начать готовить',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                ),
-                const SizedBox(
-                  height: 40,
                 ),
                 const PushComment(),
               ],
             ))
       ]),
-    );
-  }
-}
-
-class IngredientsRecipeInfo extends StatelessWidget {
-  final OneRecipeIndex recipe;
-  const IngredientsRecipeInfo({required this.recipe, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                  width: 2,
-                  color: context.watch<IngredientListProvider>().borderColor),
-              borderRadius: const BorderRadius.all(Radius.circular(5)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: IngredientListWidget(
-                listNameIngredient:
-                    context.watch<IngredientListProvider>().name,
-                listValueIngredient:
-                    context.watch<IngredientListProvider>().value,
-              ),
-            )),
-        const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () =>
-              context.read<IngredientListProvider>().checkInredient(),
-          //() {},
-          style: ButtonStyle(
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  side: const BorderSide(color: Colors.green, width: 2),
-                  borderRadius: BorderRadius.circular(30))),
-              minimumSize: MaterialStateProperty.all(const Size(300, 50)),
-              backgroundColor: MaterialStateProperty.all(
-                  const Color.fromARGB(255, 255, 255, 255)),
-              elevation: MaterialStateProperty.all(0),
-              splashFactory: NoSplash.splashFactory),
-          child: const Text(
-            'Проверить наличие',
-            style: TextStyle(
-                color: Colors.green, fontSize: 16, fontWeight: FontWeight.w500),
-          ),
-        ),
-      ],
     );
   }
 }

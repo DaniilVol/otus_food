@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/models/comment_data_model.dart';
 
+// виджет комментарий
+
 class CommentWidget extends StatelessWidget {
   final CommentData commentData;
 
@@ -20,7 +22,7 @@ class CommentWidget extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             image: DecorationImage(
-              image: NetworkImage(commentData.commentPhoto),
+              image: AssetImage(commentData.commentPhoto),
               fit: BoxFit.cover,
             ),
           ),
@@ -45,28 +47,18 @@ class CommentWidget extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 15.0),
-
               Text(
                 commentData.commentText,
                 style:
                     const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
-
               const SizedBox(height: 15.0),
-              // AspectRatio(
-              //   aspectRatio: 16 / 9, // Пропорции изображения (ширина и высота)
-              //   child: Image.network(
-              //     commentData.commentPhoto,
-              //     fit: BoxFit
-              //         .contain,
-              //   ),
-              // ),
               Container(
                 width: double.infinity,
                 height: 200.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(commentData.commentPhoto),
+                    image: AssetImage(commentData.commentPhoto),
                     fit: BoxFit.cover,
                   ),
                 ),
