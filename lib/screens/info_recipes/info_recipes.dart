@@ -72,7 +72,9 @@ class _InfoRecipesState extends State<InfoRecipes> {
         toolbarHeight: 60,
         title: Text(
           'Рецепт',
-          style: TextStyle(color: ColorList.darkGreen.color),
+          style: startCooking
+              ? TextStyle(color: ColorList.white.color)
+              : TextStyle(color: ColorList.darkGreen.color),
         ),
         centerTitle: true,
         //backgroundColor: const Color.fromARGB(255, 216, 216, 216),
