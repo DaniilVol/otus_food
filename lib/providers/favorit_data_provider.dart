@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
+// избранные рецепты, изменения списка, получение данных
+
 class FavoriteData extends ChangeNotifier {
-  List<int> favoritesData = [];
+  late List<int> favoritesData;
   FavoriteData() {
     init();
   }
 
   void init() async {
     var box = await Hive.openBox<List<int>>('favoritesData');
-    favoritesData = box.get('favoritesList', defaultValue: [])!;
+    favoritesData = box.get(
+          'favoritesList',
+        ) ??
+        [];
     await box.close();
     notifyListeners();
   }

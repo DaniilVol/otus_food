@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food/const/color_list.dart';
 import 'dart:async';
 import 'package:otus_food/data/data_recipes.dart';
 
@@ -59,23 +60,34 @@ class TimerController {
   }
 }
 
+// виджет таймера в списке шагов приготавления
+
 class TimerWidget extends StatefulWidget {
   final String timeString;
   final TimerController timerController;
   final TimerController allTimerController;
+  final bool startCooking;
 
   const TimerWidget(
       {required this.timeString,
       required this.timerController,
       required this.allTimerController,
-      super.key});
+      super.key,
+      required this.startCooking});
 
   @override
   State<TimerWidget> createState() => _TimerWidgetState();
 }
 
 class _TimerWidgetState extends State<TimerWidget> {
-  bool isChecked = false;
+  late bool isChecked;
+
+  @override
+  void initState() {
+    isChecked = false;
+
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -86,10 +98,17 @@ class _TimerWidgetState extends State<TimerWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Row(children: [
-        Checkbox(
-            value: isChecked,
-            onChanged: (value) {
+      Checkbox(
+          activeColor: ColorList.cookingCheckBox.color,
+          checkColor: ColorList.white.color,
+          side: BorderSide(
+            width: 2,
+            color: ColorList.cookingCheckBox.color,
+          ),
+          value: widget.startCooking ? isChecked : false || (isChecked = false),
+          onChanged: (value) {
+            // если нажата кнопка начать готовить
+            if (widget.startCooking) {
               // если таймер включен или чекбокс включен, нельзя включить несколько одновременно
               if (widget.allTimerController.subscription?.isPaused != false ||
                   value == false) {
@@ -103,25 +122,33 @@ class _TimerWidgetState extends State<TimerWidget> {
                   isChecked = true;
                 }
               }
-            }),
-      ]),
+            } else {
+              widget.timerController.cancel();
+            }
+          }),
       const SizedBox(
         height: 10,
       ),
-      Row(children: [
-        StreamBuilder(
-            stream: widget.timerController.timer,
-            initialData: widget.timeString,
-            builder: ((context, snapshot) {
-              if (widget.timerController.onDoneStreamController == true) {
-                widget.allTimerController.onChanged(false);
-              }
-              return Text(snapshot.requireData);
-            })),
-      ]),
+      widget.startCooking
+          ? StreamBuilder(
+              stream: widget.timerController.timer,
+              initialData: widget.timeString,
+              builder: ((context, snapshot) {
+                if (widget.timerController.onDoneStreamController == true) {
+                  widget.allTimerController.onChanged(false);
+                }
+                return Text(snapshot.requireData,
+                    style: TextStyle(color: ColorList.cookingCheckBox.color));
+              }))
+          : Text(widget.timeString,
+              style: TextStyle(
+                color: ColorList.black.color,
+              )),
     ]);
   }
 }
+
+// общее время всех шагов приготавления рецепта
 
 class AllTimeRecipes {
   TimerController allTimerController(OneRecipeIndex recipe) {

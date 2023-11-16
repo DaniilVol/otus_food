@@ -10,6 +10,8 @@ enum Style {
       TextStyle(color: Colors.red, fontSize: 14, fontWeight: FontWeight.w500)),
   ingredientValueOff(
       TextStyle(color: Colors.red, fontSize: 13, fontWeight: FontWeight.w400)),
+  timeRecipesLightGreen(TextStyle(color: Color(0xff2ECC71))),
+  nameRecipesInList(TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
   ;
 
   final TextStyle textStyle;

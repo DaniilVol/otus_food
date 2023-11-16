@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
           create: (context) => IngredientRefrigerator(),
         ),
         ChangeNotifierProvider(
+          lazy: false,
           create: (context) => FavoriteData(),
         ),
       ],

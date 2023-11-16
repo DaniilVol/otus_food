@@ -23,8 +23,8 @@ class IngredientRefrigerator extends ChangeNotifier {
   Future<void> _init() async {
     var box = await Hive.openBox<List<String>>('ingredientRefrigerator');
 
-    ingredientName = box.get('ingredientName', defaultValue: [])!;
-    ingredientValue = box.get('ingredientValue', defaultValue: [])!;
+    ingredientName = box.get('ingredientName') ?? [];
+    ingredientValue = box.get('ingredientValue') ?? [];
     await box.close();
     notifyListeners();
   }

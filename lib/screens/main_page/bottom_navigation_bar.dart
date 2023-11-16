@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/const/color_list.dart';
-import 'package:otus_food/providers/favorit_data_provider.dart';
 import 'package:otus_food/screens/favorites/favorites.dart';
 import 'package:otus_food/screens/list_recipes/list_recipes.dart';
 import 'package:otus_food/screens/auth/auth.dart';

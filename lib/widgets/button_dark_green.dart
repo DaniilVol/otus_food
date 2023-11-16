@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food/const/color_list.dart';
+
+// кнопка с передачей текста и функции
 
 class ButtonDarkGreen extends StatelessWidget {
   final Function() onPressed;
@@ -14,8 +17,7 @@ class ButtonDarkGreen extends StatelessWidget {
           shape: MaterialStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
           minimumSize: MaterialStateProperty.all(const Size(300, 50)),
-          backgroundColor:
-              MaterialStateProperty.all(const Color.fromARGB(255, 2, 56, 4)),
+          backgroundColor: MaterialStateProperty.all(ColorList.darkGreen.color),
           elevation: MaterialStateProperty.all(0),
           splashFactory: NoSplash.splashFactory),
       child: Text(

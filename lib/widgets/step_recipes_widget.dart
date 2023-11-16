@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food/const/color_list.dart';
 import 'package:otus_food/data/timer.dart';
 import 'package:otus_food/models/step_data_model.dart';
 
@@ -7,8 +8,12 @@ import 'package:otus_food/models/step_data_model.dart';
 class StepWidget extends StatefulWidget {
   final TimerController allTimerController;
   final StepData stepData;
+  final bool startCooking;
   const StepWidget(
-      {required this.allTimerController, required this.stepData, super.key});
+      {required this.allTimerController,
+      required this.stepData,
+      super.key,
+      required this.startCooking});
 
   @override
   State<StepWidget> createState() => _StepWidgetState();
@@ -20,7 +25,9 @@ class _StepWidgetState extends State<StepWidget> {
   @override
   Widget build(Object context) {
     return Card(
-        color: const Color(0xffececec),
+        color: widget.startCooking
+            ? ColorList.cookingBackGraund.color
+            : ColorList.backgroundLightGray.color,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child:
@@ -28,10 +35,12 @@ class _StepWidgetState extends State<StepWidget> {
             Column(children: [
               Text(
                 '${widget.stepData.stepNum}',
-                style: const TextStyle(
+                style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xffc2c2c2)),
+                    color: widget.startCooking
+                        ? ColorList.cookingNumber.color
+                        : const Color(0xffc2c2c2)),
               )
             ]),
             Flexible(
@@ -39,7 +48,10 @@ class _StepWidgetState extends State<StepWidget> {
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Text(widget.stepData.stepText,
-                      style: const TextStyle(color: Colors.black)),
+                      style: TextStyle(
+                          color: widget.startCooking
+                              ? ColorList.cookingText.color
+                              : Colors.black)),
                 )
               ]),
             ),
@@ -48,6 +60,7 @@ class _StepWidgetState extends State<StepWidget> {
               timerController:
                   TimerController(timeString: widget.stepData.stepTime),
               allTimerController: widget.allTimerController,
+              startCooking: widget.startCooking,
             )
           ]),
         ));

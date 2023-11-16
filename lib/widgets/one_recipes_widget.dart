@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food/const/style.dart';
 import 'package:otus_food/data/data_recipes.dart';
 import 'package:otus_food/screens/info_recipes/info_recipes.dart';
 
@@ -59,8 +60,7 @@ class OneRecipesWidget extends StatelessWidget {
                       height: 10,
                     ),
                     Text(recipe.nameRecipesShort,
-                        style: const TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.w500)),
+                        style: Style.nameRecipesInList.textStyle),
                     const SizedBox(
                       height: 10,
                     ),
@@ -72,7 +72,7 @@ class OneRecipesWidget extends StatelessWidget {
                         ),
                         Text(
                           recipe.timeRecipes,
-                          style: const TextStyle(color: Color(0xff2ECC71)),
+                          style: Style.timeRecipesLightGreen.textStyle,
                         ),
                       ],
                     ),

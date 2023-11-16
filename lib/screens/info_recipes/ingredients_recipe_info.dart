@@ -37,7 +37,7 @@ class IngredientsRecipeInfo extends StatelessWidget {
               context.read<IngredientListProvider>().checkInredient(),
           style: ButtonStyle(
               shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  side: BorderSide(color: ColorList.darkGeen.color, width: 2),
+                  side: BorderSide(color: ColorList.darkGreen.color, width: 2),
                   borderRadius: BorderRadius.circular(30))),
               minimumSize: MaterialStateProperty.all(const Size(300, 50)),
               backgroundColor: MaterialStateProperty.all(
@@ -47,7 +47,7 @@ class IngredientsRecipeInfo extends StatelessWidget {
           child: Text(
             'Проверить наличие',
             style: TextStyle(
-                color: ColorList.darkGeen.color,
+                color: ColorList.darkGreen.color,
                 fontSize: 16,
                 fontWeight: FontWeight.w500),
           ),
