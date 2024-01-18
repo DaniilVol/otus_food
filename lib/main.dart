@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:otus_food/domain/api_recipes/api_recipes.dart';
+import 'package:otus_food/domain/entity/recipe_entity.dart';
 import 'package:otus_food/providers/favorit_data_provider.dart';
 import 'package:otus_food/providers/ingredient_refrigerator_provider.dart';
 import 'package:otus_food/screens/auth/auth.dart';
@@ -7,12 +11,14 @@ import 'package:otus_food/screens/auth/auth_reg.dart';
 import 'package:otus_food/screens/main_page/bottom_navigation_bar.dart';
 import 'package:provider/provider.dart';
 import 'utils/init_hive.dart';
+import 'package:http/http.dart' as http;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   hive();
-  runApp(const MyApp());
+
+  //runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

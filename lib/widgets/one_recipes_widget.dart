@@ -14,11 +14,10 @@ class OneRecipesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => InfoRecipes(
-                recipe: recipe), // можно ли так передавать в виджет параметры?
+            builder: (context) => InfoRecipes(recipe: recipe),
           ));
         },
         child: Card(

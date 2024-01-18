@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food/models/comment_data_model.dart';
 import 'package:otus_food/widgets/button_dark_green.dart';
-import 'package:otus_food/widgets/comment_widget.dart';
+import 'package:otus_food/screens/info_recipes/comment_widget.dart';
 
 // экран комментарий
 
