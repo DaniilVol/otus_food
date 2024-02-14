@@ -40,8 +40,8 @@ class OneRecipesWidget extends StatelessWidget {
                     child: Image.asset(
                       recipe.imgRecipes,
                       width: 149,
-                      height: 136,
-                      fit: BoxFit.cover,
+                      height: 145,
+                      fit: BoxFit.fill,
                     ),
                   )
                 ],
