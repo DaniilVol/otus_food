@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food/const/color_list.dart';
 import 'package:otus_food/data/data_recipes.dart';
 import 'package:otus_food/providers/ingredient_refrigerator_provider.dart';
 import 'package:otus_food/widgets/button_dark_green.dart';
@@ -14,6 +15,7 @@ class Refrigerator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorList.backgroundLightGray.color,
       body: SingleChildScrollView(
         child: Column(
           children: [

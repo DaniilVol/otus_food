@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food/const/color_list.dart';
 import 'package:otus_food/data/data_recipes.dart';
 import 'package:otus_food/providers/favorit_data_provider.dart';
 import 'package:otus_food/widgets/one_recipes_widget.dart';
@@ -12,6 +13,7 @@ class FavoritesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: ColorList.backgroundLightGray.color,
         body: context.read<FavoriteData>().favoritesData.isEmpty
             ? const Center(
                 child: Text(
